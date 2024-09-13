@@ -14,7 +14,7 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
 
 
 
-  List<dynamic> getWallpapers() {
+  List<Wallpaper> getWallpapers() {
     wallpapersRepo.getWallpapers().then((Wallpaper){
       emit(HomeScreenloaded(Wallpaper));
         this.wallpaper = Wallpaper;
