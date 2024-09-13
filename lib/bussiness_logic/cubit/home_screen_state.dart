@@ -4,3 +4,8 @@ part of 'home_screen_cubit.dart';
 sealed class HomeScreenState {}
 
 final class HomeScreenInitial extends HomeScreenState {}
+final class HomeScreenloaded extends HomeScreenState {
+  final List<Wallpaper> wallpaper ;
+
+  HomeScreenloaded(this.wallpaper);
+}

@@ -6,7 +6,7 @@ class WallpapersRepo {
   final  ApiServices apiServices ;
 
   WallpapersRepo(this.apiServices);
-  Future<List<dynamic>> getWallpapers() async {
+  Future<List<Wallpaper>> getWallpapers() async {
    final wallpapers = await apiServices.getWallpapers();
    return wallpapers.map((wallpapers) => Wallpaper.fromjson(wallpapers)).toList(); 
   }
