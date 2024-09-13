@@ -1,29 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:gallery_app/app_route.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp( GalleryApp(appRoute: AppRoute(),));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class GalleryApp extends StatelessWidget {
+  final AppRoute appRoute ;
 
+  const GalleryApp({super.key, required this.appRoute});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Gallery',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Gallery'),
-          backgroundColor: Colors.blue,
-        ),
-        body: const Center(
-          child: Text(''),
-        ),
-      ),
+      onGenerateRoute: appRoute.generateRoute, 
     );
   }
 }
