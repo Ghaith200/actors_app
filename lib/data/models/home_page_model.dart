@@ -7,10 +7,10 @@ class Wallpaper {
   late String wallpaper_url;
   late String wallpaper_photographer;
   late String wallpaper_photographer_url;
-  late String wallpaper_photographer_id;
+  late int wallpaper_photographer_id;
   late String wallpaper_avg_color;
   late Map wallpaper_src;
-  late String wallpaper_liked;
+  late bool wallpaper_liked;
   late String wallpaper_alt;
 
   Wallpaper.fromjson(Map<String, dynamic> json) {

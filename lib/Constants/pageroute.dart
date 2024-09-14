@@ -1,3 +1,2 @@
-
-const homepage = '/homepage';
+const homepage = '/';
 const detailpage = '/detailpage';
