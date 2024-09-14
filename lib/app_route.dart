@@ -21,14 +21,15 @@ class AppRoute {
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create:(BuildContext context) => HomeScreenCubit(wallpapersRepo),
-          child :HomePage()
+          child :const HomePage()
 
           ),
         );
       case detailpage:
         return MaterialPageRoute(
-          builder: (_) => DetailsPage(),
+          builder: (_) => const DetailsPage(),
         );
     }
+    return null;
   }
 }

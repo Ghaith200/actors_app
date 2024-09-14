@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:gallery_app/Constants/api.dart';

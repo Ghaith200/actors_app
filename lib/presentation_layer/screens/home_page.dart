@@ -33,9 +33,15 @@ class _HomePageState extends State<HomePage> {
       }
     });
   }
+
   Widget showLoadingIndicator() {
-    return con
+    return Center(
+      child: CircularProgressIndicator(
+        color: MyColors.myYellow,
+      ),
+    );
   }
+
   Widget buildLoadedListWidget() {
     return SingleChildScrollView(
       child: Container(
@@ -58,7 +64,7 @@ class _HomePageState extends State<HomePage> {
         crossAxisSpacing: 1,
       ),
       itemCount: 2,
-      itemBuilder: ( context,  index) {
+      itemBuilder: (context, index) {
         // ToDo: Not Done
         return WallpaperWidget();
       },
