@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gallery_app/Constants/my_colors.dart';
@@ -63,10 +65,12 @@ class _HomePageState extends State<HomePage> {
         mainAxisSpacing: 1,
         crossAxisSpacing: 1,
       ),
-      itemCount: 2,
+      shrinkWrap: true,
+      physics: const ClampingScrollPhysics(),
+      padding: EdgeInsets.zero,
+      itemCount: allWallpapers.length,
       itemBuilder: (context, index) {
-        // ToDo: Not Done
-        return WallpaperWidget();
+        return WallpaperWidget(wallpaper: allWallpapers[index]);
       },
     );
   }

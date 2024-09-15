@@ -4,10 +4,10 @@ import 'package:gallery_app/Constants/api.dart';
 import 'package:gallery_app/Constants/api_key.dart';
 
 void main() {
-
   ApiServices apiServices = ApiServices();
   apiServices.getWallpapers();
 }
+
 class ApiServices {
   late Dio dio;
 
@@ -25,7 +25,8 @@ class ApiServices {
 
   Future<List<dynamic>> getWallpapers() async {
     try {
-      Response response = await dio.get('curated?per_page=10');
+      Response response = await dio.get('curated');
+      log('${response.statusCode}');
       log('${response.data['photos']}');
       return response.data['photos'];
     } catch (e) {

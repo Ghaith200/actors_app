@@ -1,1 +1,1 @@
-const baseurl ='https://api.pexels.com/v1/';
+const baseurl = 'https://api.pexels.com/v1/';

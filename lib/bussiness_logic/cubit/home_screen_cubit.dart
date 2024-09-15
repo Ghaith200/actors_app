@@ -6,18 +6,14 @@ import 'package:meta/meta.dart';
 part 'home_screen_state.dart';
 
 class HomeScreenCubit extends Cubit<HomeScreenState> {
-
-  final WallpapersRepo wallpapersRepo ;
-  late  List<Wallpaper> wallpaper ;
+  final WallpapersRepo wallpapersRepo;
+  List<Wallpaper> wallpaper = [];
   HomeScreenCubit(this.wallpapersRepo) : super(HomeScreenInitial());
 
-
-
-
   List<Wallpaper> getWallpapers() {
-    wallpapersRepo.getWallpapers().then((Wallpaper){
-        this.wallpaper = Wallpaper;
-      emit(HomeScreenloaded(wallpaper));
+    wallpapersRepo.getWallpapers().then((Wallpaper) {
+      this.wallpaper = wallpaper;
+      emit(HomeScreenloaded(Wallpaper));
     });
     return wallpaper;
   }
