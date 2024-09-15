@@ -24,7 +24,7 @@ class WallpaperWidget extends StatelessWidget {
               color: MyColors.myGrey,
               child: CachedNetworkImage(
                 imageUrl:
-                    'https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg',
+                    wallpaper.wallpaper_src['portrait'],
                 fit: BoxFit.cover,
                 placeholder: (context, url) => Icon(Icons.image),
               )),
