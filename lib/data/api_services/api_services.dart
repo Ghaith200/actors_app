@@ -11,10 +11,10 @@ class ApiServices {
   ApiServices() {
     BaseOptions options = BaseOptions(
       baseUrl: baseurl,
-      headers: {'Authorization': "$apiKey"},
+      headers: {'Authorization': apiKey},
       receiveDataWhenStatusError: true,
-      connectTimeout: Duration(seconds: 60),
-      receiveTimeout: Duration(seconds: 20),
+      connectTimeout: const Duration(seconds: 60),
+      receiveTimeout: const Duration(seconds: 20),
     );
 
     dio = Dio(options);
@@ -25,7 +25,7 @@ class ApiServices {
       Response response = await dio.get('curated?per_page=50&page=$page');
       return response.data['photos'];
     } catch (e) {
-      log('${e.toString()}');
+      log(e.toString());
       return [];
     }
   }

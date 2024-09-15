@@ -1,9 +1,5 @@
-import 'dart:convert';
-import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gallery_app/Constants/my_colors.dart';
-import 'package:gallery_app/bussiness_logic/cubit/home_screen/home_screen_cubit.dart';
 import 'package:gallery_app/data/api_services/api_services.dart';
 import 'package:gallery_app/data/models/home_page_model.dart';
 import 'package:gallery_app/presentation_layer/widgets/wallpaper_widget.dart';
@@ -72,7 +68,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget showLoadingIndicator() {
-    return Center(
+    return const Center(
       child: CircularProgressIndicator(
         color: MyColors.myYellow,
       ),
@@ -86,8 +82,8 @@ class _HomePageState extends State<HomePage> {
         children: [
           buildWallpaperList(),
           if (isLoadingMore) // Show loading indicator when fetching more
-            Padding(
-              padding: const EdgeInsets.all(10),
+            const Padding(
+              padding: EdgeInsets.all(10),
               child: CircularProgressIndicator(
                 color: MyColors.myYellow,
               ),

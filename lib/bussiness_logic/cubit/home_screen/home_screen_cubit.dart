@@ -11,9 +11,9 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
   HomeScreenCubit(this.wallpapersRepo) : super(HomeScreenInitial());
 
   List<Wallpaper> getWallpapers() {
-    wallpapersRepo.getWallpapers().then((Wallpaper) {
+    wallpapersRepo.getWallpapers().then((wallpaper) {
       this.wallpaper = wallpaper;
-      emit(HomeScreenloaded(Wallpaper));
+      emit(HomeScreenloaded(wallpaper));
     });
     return wallpaper;
   }
