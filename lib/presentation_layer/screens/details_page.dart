@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gallery_app/Constants/my_colors.dart';
 import 'package:gallery_app/data/models/home_page_model.dart';
+import 'package:image_downloader/image_downloader.dart';
 
 class DetailsPage extends StatelessWidget {
   final Wallpaper wallpaper;
@@ -43,6 +45,17 @@ class DetailsPage extends StatelessWidget {
                     ? Icon(Icons.favorite)
                     : Icon(Icons.favorite_border),
               ),
+              ElevatedButton(
+                  onPressed: () async {
+                    // await ImageDownloader.downloadImage(
+                    //   wallpaper.wallpaper_src['large'],
+                    //   destination:
+                    //       AndroidDestinationType.custom(directory: 'Ghaith/')
+                    //         ..inExternalFilesDir()
+                    //         ..subDirectory("custom/sample.gif"),
+                    // );
+                  },
+                  child: Icon(Icons.download))
             ],
           ),
         ),
