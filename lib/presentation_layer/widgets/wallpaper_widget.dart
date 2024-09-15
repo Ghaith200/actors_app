@@ -23,8 +23,7 @@ class WallpaperWidget extends StatelessWidget {
           child: Container(
               color: MyColors.myGrey,
               child: CachedNetworkImage(
-                imageUrl:
-                    wallpaper.wallpaper_src['portrait'],
+                imageUrl: wallpaper.wallpaper_src['portrait'],
                 fit: BoxFit.cover,
                 placeholder: (context, url) => Icon(Icons.image),
               )),
@@ -34,17 +33,29 @@ class WallpaperWidget extends StatelessWidget {
                 EdgeInsetsDirectional.symmetric(horizontal: 15, vertical: 10),
             color: Colors.black54,
             alignment: Alignment.bottomCenter,
-            child: Text(
-              '${wallpaper.wallpaper_alt}',
-              style: TextStyle(
-                  height: 1.3,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: MyColors.myWhite),
-              overflow: TextOverflow.ellipsis,
-              maxLines: 2,
-              textAlign: TextAlign.center,
-            ),
+            child: wallpaper.wallpaper_alt == null
+                ? Text(
+                    'No Description',
+                    style: TextStyle(
+                        height: 1.3,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: MyColors.myWhite),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                    textAlign: TextAlign.center,
+                  )
+                : Text(
+                    '${wallpaper.wallpaper_alt}',
+                    style: TextStyle(
+                        height: 1.3,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: MyColors.myWhite),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                    textAlign: TextAlign.center,
+                  ),
           ),
         ));
   }
