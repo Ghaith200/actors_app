@@ -4,11 +4,10 @@ import 'package:dio/dio.dart';
 import 'package:gallery_app/Constants/api.dart';
 import 'package:gallery_app/Constants/api_key.dart';
 
-class ApiServices {
-  int page = 1;
+class SearchPicApi {
   late Dio dio;
-
-  ApiServices() {
+  late String txt;
+  SearchPicApi({required this.txt}) {
     BaseOptions options = BaseOptions(
       baseUrl: baseurl,
       headers: {'Authorization': apiKey},
@@ -18,17 +17,13 @@ class ApiServices {
     dio = Dio(options);
   }
 
-  Future<List<dynamic>> getWallpapers() async {
+  Future<List<dynamic>> searchPic() async {
     try {
-      Response response = await dio.get('curated?per_page=20&page=$page');
+      Response response = await dio.get('search?query=$txt&per_page=10');
       return response.data['photos'];
     } catch (e) {
       log(e.toString());
       return [];
     }
-  }
-
-  void incrementPage() {
-    page++;
   }
 }

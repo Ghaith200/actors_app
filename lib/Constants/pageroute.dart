@@ -1,2 +1,2 @@
-const homepage = '/';
-const detailpage = '/detailpage';
+const homePage = '/';
+const searchPage = '/SearchPage';

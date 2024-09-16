@@ -22,11 +22,14 @@ class _DetailsPageState extends State<DetailsPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text(widget.wallpaper.wallpaper_alt),
+          title: Text(
+            widget.wallpaper.wallpaper_alt,
+            style: const TextStyle(color: MyColors.myWhite),
+          ),
           backgroundColor: MyColors.myYellow,
         ),
         body: Container(
-          color: MyColors.myWhite,
+          color: MyColors.myGrey,
           child: ListView(
             children: [
               SizedBox(
@@ -44,28 +47,36 @@ class _DetailsPageState extends State<DetailsPage> {
               ListTile(
                 title: Text(
                   widget.wallpaper.wallpaper_alt,
-                  maxLines: 3,
+                  softWrap: true,
+                  maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(color: Colors.black),
+                  style: const TextStyle(color: MyColors.myWhite),
                 ),
                 subtitle: Text(
                   widget.wallpaper.wallpaper_photographer,
-                  style: const TextStyle(color: Colors.black),
+                  style: const TextStyle(color: MyColors.myWhite),
                 ),
                 trailing: widget.wallpaper.wallpaper_liked
-                    ? const Icon(Icons.favorite)
-                    : const Icon(Icons.favorite_border),
+                    ? const Icon(
+                        Icons.favorite,
+                        color: Colors.red,
+                      )
+                    : const Icon(
+                        Icons.favorite_border,
+                        color: Colors.red,
+                      ),
               ),
               Container(
-                padding: const EdgeInsets.all(16),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 90, vertical: 10),
                 child: _progress != null
                     ? const CustomCircleProgressIndecator()
                     : ElevatedButton(
                         style: ButtonStyle(
                             backgroundColor:
-                                WidgetStateProperty.all(MyColors.myGrey),
+                                WidgetStateProperty.all(MyColors.myWhite),
                             foregroundColor:
-                                WidgetStateProperty.all(MyColors.myYellow)),
+                                WidgetStateProperty.all(MyColors.myGrey)),
                         onPressed: () {
                           FileDownloader.downloadFile(
                               url: widget.wallpaper.wallpaper_src['original'],
