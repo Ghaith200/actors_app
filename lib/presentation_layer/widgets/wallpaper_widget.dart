@@ -28,7 +28,7 @@ class WallpaperWidget extends StatelessWidget {
             },
             child: Container(
                 clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: MyColors.myGrey,
                 ),
                 child: CachedNetworkImage(

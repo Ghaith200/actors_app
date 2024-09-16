@@ -3,9 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gallery_app/Constants/pageroute.dart';
 import 'package:gallery_app/bussiness_logic/cubit/home_screen/home_screen_cubit.dart';
 import 'package:gallery_app/data/api_services/api_services.dart';
-import 'package:gallery_app/data/models/home_page_model.dart';
 import 'package:gallery_app/data/repository/wallpapers_repo.dart';
-import 'package:gallery_app/presentation_layer/screens/details_page.dart';
 import 'package:gallery_app/presentation_layer/screens/home_page.dart';
 
 class AppRoute {
@@ -14,7 +12,6 @@ class AppRoute {
   AppRoute() {
     wallpapersRepo = WallpapersRepo(ApiServices());
     homeScreenCubit = HomeScreenCubit(wallpapersRepo);
-    Wallpaper wallpaper ;
   }
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {

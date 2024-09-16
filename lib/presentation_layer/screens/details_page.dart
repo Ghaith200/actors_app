@@ -1,13 +1,11 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_file_downloader/flutter_file_downloader.dart';
 import 'package:gallery_app/Constants/my_colors.dart';
-import 'package:gallery_app/data/api_services/api_services.dart';
 import 'package:gallery_app/data/models/home_page_model.dart';
 import 'package:gallery_app/presentation_layer/widgets/custom_circle_progress_indecator.dart';
-import 'package:path_provider/path_provider.dart';
 
 class DetailsPage extends StatefulWidget {
   final Wallpaper wallpaper;
@@ -21,7 +19,6 @@ class _DetailsPageState extends State<DetailsPage> {
   double? _progress;
   @override
   Widget build(BuildContext context) {
-    String progressValue = '';
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -32,7 +29,7 @@ class _DetailsPageState extends State<DetailsPage> {
           color: MyColors.myWhite,
           child: ListView(
             children: [
-              Container(
+              SizedBox(
                 width: double.infinity,
                 height: 400,
                 child: CachedNetworkImage(
@@ -49,20 +46,20 @@ class _DetailsPageState extends State<DetailsPage> {
                   widget.wallpaper.wallpaper_alt,
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(color: Colors.black),
+                  style: const TextStyle(color: Colors.black),
                 ),
                 subtitle: Text(
                   widget.wallpaper.wallpaper_photographer,
-                  style: TextStyle(color: Colors.black),
+                  style: const TextStyle(color: Colors.black),
                 ),
                 trailing: widget.wallpaper.wallpaper_liked
-                    ? Icon(Icons.favorite)
-                    : Icon(Icons.favorite_border),
+                    ? const Icon(Icons.favorite)
+                    : const Icon(Icons.favorite_border),
               ),
               Container(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 child: _progress != null
-                    ? CustomCircleProgressIndecator()
+                    ? const CustomCircleProgressIndecator()
                     : ElevatedButton(
                         style: ButtonStyle(
                             backgroundColor:
@@ -78,13 +75,13 @@ class _DetailsPageState extends State<DetailsPage> {
                                 });
                               },
                               onDownloadCompleted: (value) {
-                                print('path  $value ');
+                                log('path  $value ');
                                 setState(() {
                                   _progress = null;
                                 });
                               });
                         },
-                        child: Icon(Icons.download),
+                        child: const Icon(Icons.download),
                       ),
               )
             ],

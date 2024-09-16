@@ -14,7 +14,7 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      body: Container(
+      body: SizedBox(
         width: MediaQuery.of(context).size.width,
         child: Container(
           color: MyColors.myYellow,
@@ -26,7 +26,7 @@ class _SearchPageState extends State<SearchPage> {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      icon: Icon(Icons.arrow_back_ios_new_rounded)),
+                      icon: const Icon(Icons.arrow_back_ios_new_rounded)),
                   Expanded(
                     child: TextFormField(
                       controller: searchController,
@@ -40,14 +40,14 @@ class _SearchPageState extends State<SearchPage> {
                   ),
                   IconButton(
                     onPressed: () {},
-                    icon: Icon(Icons.check),
+                    icon: const Icon(Icons.check),
                   )
                 ],
               ),
               Expanded(
                 child: Container(
                   color: MyColors.myGrey,
-                  child: Center(
+                  child: const Center(
                     child: Text(
                       'RESULTS WILL APPEAR HERE?',
                       style: TextStyle(color: MyColors.myWhite),
