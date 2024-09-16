@@ -2,8 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gallery_app/Constants/my_colors.dart';
+import 'package:gallery_app/data/api_services/api_services.dart';
+import 'package:gallery_app/data/api_services/download_image.dart';
 import 'package:gallery_app/data/models/home_page_model.dart';
-import 'package:image_downloader/image_downloader.dart';
 
 class DetailsPage extends StatelessWidget {
   final Wallpaper wallpaper;
@@ -35,6 +36,8 @@ class DetailsPage extends StatelessWidget {
               ListTile(
                 title: Text(
                   wallpaper.wallpaper_alt,
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(color: Colors.black),
                 ),
                 subtitle: Text(
@@ -46,14 +49,18 @@ class DetailsPage extends StatelessWidget {
                     : Icon(Icons.favorite_border),
               ),
               ElevatedButton(
-                  onPressed: () async {
-                    // await ImageDownloader.downloadImage(
-                    //   wallpaper.wallpaper_src['large'],
-                    //   destination:
-                    //       AndroidDestinationType.custom(directory: 'Ghaith/')
-                    //         ..inExternalFilesDir()
-                    //         ..subDirectory("custom/sample.gif"),
-                    // );
+                  style: ButtonStyle(
+                      backgroundColor: WidgetStateProperty.all(MyColors.myGrey),
+                      iconColor: WidgetStateProperty.all(MyColors.myYellow)),
+                  onPressed: () {
+                    DownloadImage(imgurl: wallpaper.wallpaper_src['original'])
+                        .downloadImage();
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("Downloading Started"),
+                        backgroundColor: MyColors.myYellow,
+                      ),
+                    );
                   },
                   child: Icon(Icons.download))
             ],

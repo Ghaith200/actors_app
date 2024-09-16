@@ -1,11 +1,13 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:gallery_app/Constants/api.dart';
 import 'package:gallery_app/Constants/api_key.dart';
+import 'package:path_provider/path_provider.dart';
 
 class ApiServices {
-  int page = 1; // Track the page number
+  int page = 1; 
   late Dio dio;
 
   ApiServices() {

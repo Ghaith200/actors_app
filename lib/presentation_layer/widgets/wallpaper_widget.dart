@@ -34,7 +34,10 @@ class WallpaperWidget extends StatelessWidget {
                 child: CachedNetworkImage(
                   imageUrl: wallpaper.wallpaper_src['original'],
                   fit: BoxFit.cover,
-                  placeholder: (context, url) => const Icon(Icons.image),
+                  placeholder: (context, url) =>
+                      Image.asset('assets/images/Loading.gif'),
+                  errorWidget: (context, url, error) =>
+                      const Icon(Icons.broken_image_outlined),
                 )),
           ),
           footer: Container(

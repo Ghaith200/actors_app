@@ -36,9 +36,9 @@ dependencies:
   flutter_bloc: ^8.1.6
   flutter_offline: ^4.0.0
   http: ^1.2.2
-
   insta_image_viewer: ^1.0.4
   meta: ^1.15.0
+  path_provider: ^2.1.4
   shared_preferences: ^2.3.2
 
 dev_dependencies:
