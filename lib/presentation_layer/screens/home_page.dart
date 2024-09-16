@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gallery_app/Constants/my_colors.dart';
 import 'package:gallery_app/data/api_services/api_services.dart';
 import 'package:gallery_app/data/models/home_page_model.dart';
+import 'package:gallery_app/presentation_layer/screens/search_page.dart';
 import 'package:gallery_app/presentation_layer/widgets/wallpaper_widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,7 +24,7 @@ class _HomePageState extends State<HomePage> {
     allWallpapers = [];
     _controller = ScrollController();
     _controller.addListener(_scrollListener);
-    _fetchInitialWallpapers(); // Initial fetch
+    _fetchInitialWallpapers();
   }
 
   void _scrollListener() {
@@ -37,9 +38,7 @@ class _HomePageState extends State<HomePage> {
     // Fetch the initial data when the screen loads
     List<dynamic> wallpapers = await apiServices.getWallpapers();
     setState(() {
-      allWallpapers = wallpapers
-          .map((w) => Wallpaper.fromjson(w))
-          .toList(); 
+      allWallpapers = wallpapers.map((w) => Wallpaper.fromjson(w)).toList();
     });
   }
 
@@ -51,7 +50,7 @@ class _HomePageState extends State<HomePage> {
     apiServices.incrementPage(); // Increment the page number
 
     List<dynamic> newWallpapers =
-        await apiServices.getWallpapers(); // Call your API to get more data
+        await apiServices.getWallpapers(); // Call  API to get more data
 
     setState(() {
       allWallpapers.addAll(newWallpapers
@@ -81,7 +80,7 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         children: [
           buildWallpaperList(),
-          if (isLoadingMore) // Show loading indicator when fetching more
+          if (isLoadingMore) // Show loading indicator when fetching more data
             const Padding(
               padding: EdgeInsets.all(10),
               child: CircularProgressIndicator(
@@ -127,13 +126,15 @@ class _HomePageState extends State<HomePage> {
           actions: [
             IconButton(
               onPressed: () {
-                _fetchInitialWallpapers(); // Refresh on search click
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const SearchPage(),
+                ));
               },
               icon: const Icon(Icons.search),
             ),
           ],
         ),
-        body: buildBlocWidget(),
+        body: Container(color: MyColors.myGrey, child: buildBlocWidget()),
       ),
     );
   }
