@@ -14,48 +14,50 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: AppBar(
-        backgroundColor: MyColors.myYellow,
-        title: const Text('Search Page'),
-        actions: [],
-      ),
-      body: ListView(
-        children: [
-          Container(
-            width: MediaQuery.of(context).size.width,
-            child: Row(
-              children: [
-                IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: Icon(Icons.arrow_back_ios_new_rounded)),
-                Expanded(
-                  child: TextFormField(
-                    controller: searchController,
-                    decoration: const InputDecoration(
-                      hintText: 'Search',
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(color: MyColors.myGrey)),
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        child: Container(
+          color: MyColors.myYellow,
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: Icon(Icons.arrow_back_ios_new_rounded)),
+                  Expanded(
+                    child: TextFormField(
+                      controller: searchController,
+                      decoration: const InputDecoration(
+                        hintText: 'Search',
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide(color: MyColors.myGrey)),
+                      ),
+                      onFieldSubmitted: (value) {},
                     ),
-                    onFieldSubmitted: (value) {},
                   ),
-                )
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Expanded(
-            child: Container(
-              color: MyColors.myGrey,
-              child: const Center(
-                child: Text('Search Page'),
+                  IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.check),
+                  )
+                ],
               ),
-            ),
+              Expanded(
+                child: Container(
+                  color: MyColors.myGrey,
+                  child: Center(
+                    child: Text(
+                      'RESULTS WILL APPEAR HERE?',
+                      style: TextStyle(color: MyColors.myWhite),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     ));
   }
