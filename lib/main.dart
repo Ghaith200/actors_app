@@ -5,7 +5,6 @@ void main() {
   runApp(GalleryApp(
     appRoute: AppRoute(),
   ));
-
 }
 
 class GalleryApp extends StatelessWidget {

@@ -34,6 +34,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.6
+  flutter_file_downloader: ^2.0.0
   flutter_offline: ^4.0.0
   http: ^1.2.2
   insta_image_viewer: ^1.0.4

@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       allWallpapers = wallpapers
           .map((w) => Wallpaper.fromjson(w))
-          .toList(); // Assuming Wallpaper model has fromJson
+          .toList(); 
     });
   }
 

@@ -24,7 +24,7 @@ class ApiServices {
 
   Future<List<dynamic>> getWallpapers() async {
     try {
-      Response response = await dio.get('curated?per_page=50&page=$page');
+      Response response = await dio.get('curated?per_page=20&page=$page');
       return response.data['photos'];
     } catch (e) {
       log(e.toString());
