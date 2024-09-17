@@ -1,3 +1,4 @@
+// ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
 import 'package:gallery_app/data/models/home_page_model.dart';
 import 'package:gallery_app/data/repository/wallpapers_repo.dart';

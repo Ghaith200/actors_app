@@ -91,7 +91,7 @@ class _SearchPageState extends State<SearchPage> {
                       decoration: InputDecoration(
                           focusColor: MyColors.myWhite,
                           hintText: 'Search',
-                          hintStyle: TextStyle(color: MyColors.myGrey),
+                          hintStyle: const TextStyle(color: MyColors.myGrey),
                           suffixIcon: IconButton(
                               onPressed: () {
                                 searchController.clear();

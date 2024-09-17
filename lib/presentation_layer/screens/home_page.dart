@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gallery_app/Constants/my_colors.dart';
 import 'package:gallery_app/data/api_services/api_services.dart';
 import 'package:gallery_app/data/models/home_page_model.dart';
-import 'package:gallery_app/presentation_layer/screens/search_page.dart';
 import 'package:gallery_app/presentation_layer/widgets/my_drawer.dart';
 import 'package:gallery_app/presentation_layer/widgets/wallpaper_widget.dart';
 
@@ -51,7 +50,7 @@ class _HomePageState extends State<HomePage> {
     apiServices.incrementPage(); // Increment the page number
 
     List<dynamic> newWallpapers =
-        await apiServices.getWallpapers(); // Call  API to get more data
+        await apiServices.getWallpapers(); // Call API to get more data
 
     setState(() {
       allWallpapers.addAll(newWallpapers
@@ -122,13 +121,27 @@ class _HomePageState extends State<HomePage> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: MyColors.myGrey,
-        drawer: MyDrawer(),
+        drawer: const MyDrawer(), // The drawer is defined here
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             "Home Page",
             style: TextStyle(color: MyColors.myGrey),
           ),
           backgroundColor: MyColors.myYellow,
+          leading: Builder(
+            // Wrap the IconButton with Builder to provide the correct context
+            builder: (context) {
+              return IconButton(
+                icon: const Icon(
+                  Icons.menu,
+                  color: MyColors.myGrey, // Same color as the search icon
+                ),
+                onPressed: () {
+                  Scaffold.of(context).openDrawer(); // Opens the drawer
+                },
+              );
+            },
+          ),
           actions: [
             IconButton(
               onPressed: () {
@@ -136,12 +149,13 @@ class _HomePageState extends State<HomePage> {
               },
               icon: const Icon(
                 Icons.search,
-                color: MyColors.myGrey,
+                color: MyColors.myGrey, // Search icon color
               ),
             ),
           ],
         ),
         body: Container(
+            // ignore: deprecated_member_use
             color: Theme.of(context).colorScheme.background,
             child: buildBlocWidget()),
       ),

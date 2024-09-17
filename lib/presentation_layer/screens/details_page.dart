@@ -29,6 +29,7 @@ class _DetailsPageState extends State<DetailsPage> {
           backgroundColor: MyColors.myYellow,
         ),
         body: Container(
+          // ignore: deprecated_member_use
           color: Theme.of(context).colorScheme.background,
           child: ListView(
             children: [

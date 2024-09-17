@@ -8,6 +8,7 @@ class MyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      // ignore: deprecated_member_use
       backgroundColor: Theme.of(context).colorScheme.background,
       child: Column(
         children: [
@@ -40,11 +41,11 @@ class MyDrawer extends StatelessWidget {
             onTap: () => {
               Navigator.pop(context),
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => SettingsPage(),
+                builder: (context) => const SettingsPage(),
               ))
             },
           ),
-          Spacer(),
+          const Spacer(),
           // logout list tile
           MyDrawerTile(
             text: "L O G  O U T",
