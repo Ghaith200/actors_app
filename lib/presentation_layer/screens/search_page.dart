@@ -41,8 +41,11 @@ class _SearchPageState extends State<SearchPage> {
               ],
             ),
           )
-        : const Center(
-            child: Text("Search Something"),
+        : Center(
+            child: Text(
+              "Search Something...",
+              style: TextStyle(color: Theme.of(context).colorScheme.primary),
+            ),
           );
   }
 
@@ -84,10 +87,11 @@ class _SearchPageState extends State<SearchPage> {
                   Expanded(
                     child: TextFormField(
                       controller: searchController,
+                      cursorColor: MyColors.myGrey,
                       decoration: InputDecoration(
                           focusColor: MyColors.myWhite,
                           hintText: 'Search',
-                          hintStyle: const TextStyle(color: MyColors.myGrey),
+                          hintStyle: TextStyle(color: MyColors.myGrey),
                           suffixIcon: IconButton(
                               onPressed: () {
                                 searchController.clear();
@@ -111,8 +115,9 @@ class _SearchPageState extends State<SearchPage> {
                 ],
               ),
               Expanded(
-                child:
-                    Container(color: MyColors.myGrey, child: buildBlocWidget()),
+                child: Container(
+                    color: Theme.of(context).colorScheme.surface,
+                    child: buildBlocWidget()),
               ),
             ],
           ),

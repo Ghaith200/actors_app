@@ -24,12 +24,12 @@ class _DetailsPageState extends State<DetailsPage> {
         appBar: AppBar(
           title: Text(
             widget.wallpaper.wallpaper_alt,
-            style: const TextStyle(color: MyColors.myWhite),
+            style: TextStyle(color: Theme.of(context).colorScheme.primary),
           ),
           backgroundColor: MyColors.myYellow,
         ),
         body: Container(
-          color: MyColors.myGrey,
+          color: Theme.of(context).colorScheme.background,
           child: ListView(
             children: [
               SizedBox(
@@ -46,15 +46,19 @@ class _DetailsPageState extends State<DetailsPage> {
               ),
               ListTile(
                 title: Text(
-                  widget.wallpaper.wallpaper_alt,
+                  widget.wallpaper.wallpaper_alt.isEmpty
+                      ? "No Discription"
+                      : widget.wallpaper.wallpaper_alt,
                   softWrap: true,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(color: MyColors.myWhite),
+                  style:
+                      TextStyle(color: Theme.of(context).colorScheme.primary),
                 ),
                 subtitle: Text(
                   widget.wallpaper.wallpaper_photographer,
-                  style: const TextStyle(color: MyColors.myWhite),
+                  style:
+                      TextStyle(color: Theme.of(context).colorScheme.primary),
                 ),
                 trailing: widget.wallpaper.wallpaper_liked
                     ? const Icon(
@@ -73,8 +77,8 @@ class _DetailsPageState extends State<DetailsPage> {
                     ? const CustomCircleProgressIndecator()
                     : ElevatedButton(
                         style: ButtonStyle(
-                            backgroundColor:
-                                WidgetStateProperty.all(MyColors.myWhite),
+                            backgroundColor: WidgetStateProperty.all(
+                                Theme.of(context).colorScheme.primary),
                             foregroundColor:
                                 WidgetStateProperty.all(MyColors.myGrey)),
                         onPressed: () {

@@ -3,6 +3,7 @@ import 'package:gallery_app/Constants/my_colors.dart';
 import 'package:gallery_app/data/api_services/api_services.dart';
 import 'package:gallery_app/data/models/home_page_model.dart';
 import 'package:gallery_app/presentation_layer/screens/search_page.dart';
+import 'package:gallery_app/presentation_layer/widgets/my_drawer.dart';
 import 'package:gallery_app/presentation_layer/widgets/wallpaper_widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -120,19 +121,29 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: MyColors.myGrey,
+        drawer: MyDrawer(),
         appBar: AppBar(
-          title: const Text("Home Page"),
+          title: Text(
+            "Home Page",
+            style: TextStyle(color: MyColors.myGrey),
+          ),
           backgroundColor: MyColors.myYellow,
           actions: [
             IconButton(
               onPressed: () {
                 Navigator.of(context).pushNamed('/SearchPage');
               },
-              icon: const Icon(Icons.search),
+              icon: const Icon(
+                Icons.search,
+                color: MyColors.myGrey,
+              ),
             ),
           ],
         ),
-        body: Container(color: MyColors.myGrey, child: buildBlocWidget()),
+        body: Container(
+            color: Theme.of(context).colorScheme.background,
+            child: buildBlocWidget()),
       ),
     );
   }
