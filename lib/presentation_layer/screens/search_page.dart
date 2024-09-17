@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:gallery_app/Constants/my_colors.dart';
-import 'package:gallery_app/data/api_services/search_pic_api.dart';
+import 'package:gallery_app/data/Services/search_pic_api.dart';
 import 'package:gallery_app/data/models/home_page_model.dart';
 import 'package:gallery_app/presentation_layer/widgets/custom_circle_progress_indecator.dart';
+
 import 'package:gallery_app/presentation_layer/widgets/wallpaper_widget.dart';
 
 class SearchPage extends StatefulWidget {
@@ -16,6 +19,8 @@ class _SearchPageState extends State<SearchPage> {
   final ScrollController _controller = ScrollController();
   TextEditingController searchController = TextEditingController();
   late List<Wallpaper> allWallpapers = [];
+  String? selectedOption;
+
   Widget buildBlocWidget() {
     return allWallpapers.isEmpty && searchController.text.isNotEmpty
         ? showLoadingIndicator()
@@ -83,7 +88,10 @@ class _SearchPageState extends State<SearchPage> {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      icon: const Icon(Icons.arrow_back_ios_new_rounded)),
+                      icon: Icon(
+                        Icons.arrow_back_ios_new_rounded,
+                        color: Theme.of(context).colorScheme.background,
+                      )),
                   Expanded(
                     child: TextFormField(
                       controller: searchController,
@@ -94,21 +102,26 @@ class _SearchPageState extends State<SearchPage> {
                           hintStyle: const TextStyle(color: MyColors.myGrey),
                           suffixIcon: IconButton(
                               onPressed: () {
-                                searchController.clear();
+                                _showFilterDialog();
                               },
-                              icon: const Icon(Icons.close)),
+                              icon: Icon(
+                                Icons.filter_list_rounded,
+                                color: Theme.of(context).colorScheme.background,
+                              )),
                           border: const OutlineInputBorder(
                               borderSide: BorderSide.none)),
                       onFieldSubmitted: (value) async {
-                        List<dynamic> newWallpapers =
-                            await SearchPicApi(txt: searchController.text)
-                                .searchPic();
+                        List<dynamic> newWallpapers = await SearchPicApi(
+                                txt: searchController.text,
+                                oriantation: '$selectedOption')
+                            .searchPic();
                         setState(() {
                           allWallpapers.clear();
                           allWallpapers.addAll(newWallpapers
                               .map((w) => Wallpaper.fromjson(w))
                               .toList());
                         });
+                        log('$selectedOption');
                       },
                     ),
                   ),
@@ -124,5 +137,62 @@ class _SearchPageState extends State<SearchPage> {
         ),
       ),
     ));
+  }
+
+  void _showFilterDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Select Filter"),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                title: const Text("None"),
+                onTap: () {
+                  _setFilterOption("");
+                },
+              ),
+              ListTile(
+                title: const Text("landscape"),
+                onTap: () {
+                  _setFilterOption("landscape");
+                },
+              ),
+              ListTile(
+                title: const Text("portrait"),
+                onTap: () {
+                  _setFilterOption("portrait");
+                },
+              ),
+              ListTile(
+                title: const Text("square"),
+                onTap: () {
+                  _setFilterOption("square");
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _setFilterOption(String option) async {
+    setState(() {
+      selectedOption = option;
+    });
+    log("$selectedOption");
+    Navigator.pop(context);
+    allWallpapers.clear();
+    List<dynamic> newWallpapers = await SearchPicApi(
+            txt: searchController.text, oriantation: '$selectedOption')
+        .searchPic();
+    setState(() {
+      allWallpapers.clear();
+      allWallpapers
+          .addAll(newWallpapers.map((w) => Wallpaper.fromjson(w)).toList());
+    });
   }
 }

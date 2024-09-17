@@ -7,7 +7,8 @@ import 'package:gallery_app/Constants/api_key.dart';
 class SearchPicApi {
   late Dio dio;
   late String txt;
-  SearchPicApi({required this.txt}) {
+  late String oriantation = '';
+  SearchPicApi({required this.txt, required this.oriantation}) {
     BaseOptions options = BaseOptions(
       baseUrl: baseurl,
       headers: {'Authorization': apiKey},

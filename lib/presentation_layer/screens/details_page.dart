@@ -97,7 +97,10 @@ class _DetailsPageState extends State<DetailsPage> {
                                 });
                               });
                         },
-                        child: const Icon(Icons.download),
+                        child: Icon(
+                          Icons.download,
+                          color: Theme.of(context).colorScheme.tertiary,
+                        ),
                       ),
               )
             ],

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gallery_app/Constants/my_colors.dart';
-import 'package:gallery_app/data/api_services/api_services.dart';
+import 'package:gallery_app/data/Services/api_services.dart';
 import 'package:gallery_app/data/models/home_page_model.dart';
 import 'package:gallery_app/presentation_layer/widgets/my_drawer.dart';
 import 'package:gallery_app/presentation_layer/widgets/wallpaper_widget.dart';
@@ -35,7 +35,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _fetchInitialWallpapers() async {
-    // Fetch the initial data when the screen loads
     List<dynamic> wallpapers = await apiServices.getWallpapers();
     setState(() {
       allWallpapers = wallpapers.map((w) => Wallpaper.fromjson(w)).toList();
@@ -47,10 +46,9 @@ class _HomePageState extends State<HomePage> {
       isLoadingMore = true;
     });
 
-    apiServices.incrementPage(); // Increment the page number
+    apiServices.incrementPage();
 
-    List<dynamic> newWallpapers =
-        await apiServices.getWallpapers(); // Call API to get more data
+    List<dynamic> newWallpapers = await apiServices.getWallpapers();
 
     setState(() {
       allWallpapers.addAll(newWallpapers
@@ -121,7 +119,7 @@ class _HomePageState extends State<HomePage> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: MyColors.myGrey,
-        drawer: const MyDrawer(), // The drawer is defined here
+        drawer: const MyDrawer(),
         appBar: AppBar(
           title: const Text(
             "Home Page",
@@ -129,15 +127,15 @@ class _HomePageState extends State<HomePage> {
           ),
           backgroundColor: MyColors.myYellow,
           leading: Builder(
-            // Wrap the IconButton with Builder to provide the correct context
+            // Wraped the IconButton with Builder to provide the correct context
             builder: (context) {
               return IconButton(
                 icon: const Icon(
                   Icons.menu,
-                  color: MyColors.myGrey, // Same color as the search icon
+                  color: MyColors.myGrey,
                 ),
                 onPressed: () {
-                  Scaffold.of(context).openDrawer(); // Opens the drawer
+                  Scaffold.of(context).openDrawer();
                 },
               );
             },
@@ -149,7 +147,7 @@ class _HomePageState extends State<HomePage> {
               },
               icon: const Icon(
                 Icons.search,
-                color: MyColors.myGrey, // Search icon color
+                color: MyColors.myGrey,
               ),
             ),
           ],

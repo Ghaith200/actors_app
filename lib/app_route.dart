@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gallery_app/Constants/pageroute.dart';
 import 'package:gallery_app/bussiness_logic/cubit/Search%20Cubit/search_screen_cubit.dart';
 import 'package:gallery_app/bussiness_logic/cubit/home_screen/home_screen_cubit.dart';
-import 'package:gallery_app/data/api_services/api_services.dart';
+import 'package:gallery_app/data/Services/api_services.dart';
 import 'package:gallery_app/data/repository/wallpapers_repo.dart';
 import 'package:gallery_app/presentation_layer/screens/home_page.dart';
 import 'package:gallery_app/presentation_layer/screens/search_page.dart';
