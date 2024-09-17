@@ -144,30 +144,64 @@ class _SearchPageState extends State<SearchPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text("Select Filter"),
+          backgroundColor: Theme.of(context).colorScheme.background,
+          title: Text("Select Filter",
+              style: TextStyle(color: Theme.of(context).colorScheme.primary)),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               ListTile(
-                title: const Text("None"),
+                leading: Icon(
+                  Icons.not_interested,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+                title: Text(
+                  "None",
+                  style:
+                      TextStyle(color: Theme.of(context).colorScheme.primary),
+                ),
                 onTap: () {
                   _setFilterOption("");
                 },
               ),
               ListTile(
-                title: const Text("landscape"),
+                leading: Icon(
+                  Icons.landscape_outlined,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+                title: Text(
+                  "landscape",
+                  style:
+                      TextStyle(color: Theme.of(context).colorScheme.primary),
+                ),
                 onTap: () {
                   _setFilterOption("landscape");
                 },
               ),
               ListTile(
-                title: const Text("portrait"),
+                leading: Icon(
+                  Icons.portrait_rounded,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+                title: Text(
+                  "portrait",
+                  style:
+                      TextStyle(color: Theme.of(context).colorScheme.primary),
+                ),
                 onTap: () {
                   _setFilterOption("portrait");
                 },
               ),
               ListTile(
-                title: const Text("square"),
+                leading: Icon(
+                  Icons.crop_square_rounded,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+                title: Text(
+                  "square",
+                  style:
+                      TextStyle(color: Theme.of(context).colorScheme.primary),
+                ),
                 onTap: () {
                   _setFilterOption("square");
                 },

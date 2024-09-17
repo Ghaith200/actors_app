@@ -7,11 +7,31 @@ void main() {
   runApp(
     ChangeNotifierProvider(
       create: (context) => ThemeProvider(),
-      child: GalleryApp(
-        appRoute: AppRoute(),
-      ),
+      child: const AppInitializer(),
     ),
   );
+}
+
+class AppInitializer extends StatelessWidget {
+  const AppInitializer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
+
+    // Return a FutureBuilder to ensure the theme is loaded
+    return FutureBuilder(
+      future: themeProvider.loadThemeFromPreferences(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          // Show splash screen or loading while waiting
+          return const Center(child: CircularProgressIndicator());
+        } else {
+          return GalleryApp(appRoute: AppRoute());
+        }
+      },
+    );
+  }
 }
 
 class GalleryApp extends StatelessWidget {

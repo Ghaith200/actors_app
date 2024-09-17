@@ -1,33 +1,41 @@
 import 'package:flutter/material.dart';
-import 'dark_mode.dart'; // Import the dark theme
-import 'light_mode.dart'; // Import the light theme
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dark_mode.dart';
+import 'light_mode.dart';
 
 class ThemeProvider with ChangeNotifier {
-  // Initialize the theme to light mode by default
   ThemeData _themeData = lightmode;
-  
-  // Getter to access the current theme
-  ThemeData get themeData => _themeData;
 
-  // Check if the current theme is dark mode
+  ThemeData get themeData => _themeData;
   bool get isDarkMode => _themeData == darkMode;
 
-  // Setter to update the theme and notify listeners of changes
+  ThemeProvider() {
+    loadThemeFromPreferences();
+  }
+
   set themeData(ThemeData themeData) {
     _themeData = themeData;
-    // Notify widgets listening to this provider to rebuild with the new theme
+    _saveThemeToPreferences(themeData == darkMode);
     notifyListeners();
   }
 
-  // Method to toggle between light and dark themes
   void toggleTheme() {
-    // If the current theme is light mode, switch to dark mode
     if (_themeData == lightmode) {
       themeData = darkMode;
-    } 
-    // Otherwise, switch to light mode
-    else {
+    } else {
       themeData = lightmode;
     }
+  }
+  Future<void> _saveThemeToPreferences(bool isDarkMode) async {
+    final prefrans = await SharedPreferences.getInstance();
+    prefrans.setBool('isDarkMode', isDarkMode);
+  }
+
+  
+  Future<void> loadThemeFromPreferences() async {
+    final prefs = await SharedPreferences.getInstance();
+    final isDarkMode = prefs.getBool('isDarkMode') ?? false;
+    _themeData = isDarkMode ? darkMode : lightmode;
+    notifyListeners();
   }
 }
