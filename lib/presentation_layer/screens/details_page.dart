@@ -29,7 +29,18 @@ class _DetailsPageState extends State<DetailsPage> {
           backgroundColor: Theme.of(context).colorScheme.secondary,
         ),
         body: Container(
-          child: ListView(),
+          child: ListView(
+            children: [
+              Container(
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height * 0.6,
+                child: Image.network(
+                  'https://image.tmdb.org/t/p/w500${widget.wallpaper.profilePath}',
+                  fit: BoxFit.cover,
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

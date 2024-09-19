@@ -4,6 +4,7 @@ import 'package:gallery_app/Constants/my_colors.dart';
 import 'package:gallery_app/data/models/home_page_model.dart';
 import 'package:gallery_app/data/models/images_model.dart';
 import 'package:gallery_app/presentation_layer/screens/details_page.dart';
+import 'package:gallery_app/presentation_layer/widgets/my_progress_indecator.dart';
 
 class WallpaperWidget extends StatelessWidget {
   final HomePageModel homePageModel;
@@ -39,11 +40,11 @@ class WallpaperWidget extends StatelessWidget {
                 decoration: const BoxDecoration(
                   color: MyColors.myGrey,
                 ),
-                child: Center(
-                  child: Text(
-                    "${homePageModel.name}",
-                    style: const TextStyle(color: MyColors.myWhite),
-                  ),
+                child: CachedNetworkImage(
+                  imageUrl:
+                      'https://image.tmdb.org/t/p/w500${homePageModel.profilePath}',
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) => MyCircleProgressIndecator(),
                 )),
           ),
           footer: Container(
@@ -52,29 +53,17 @@ class WallpaperWidget extends StatelessWidget {
                 horizontal: 15, vertical: 10),
             color: Colors.black54,
             alignment: Alignment.bottomCenter,
-            child: homePageModel.gender!.isEven
-                ? const Text(
-                    'Female',
-                    style: TextStyle(
-                        height: 1.3,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: MyColors.myWhite),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                    textAlign: TextAlign.center,
-                  )
-                : const Text(
-                    'Male',
-                    style: TextStyle(
-                        height: 1.3,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: MyColors.myWhite),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                    textAlign: TextAlign.center,
-                  ),
+            child: Text(
+              homePageModel.name!,
+              style: TextStyle(
+                  height: 1.3,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: MyColors.myWhite),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              textAlign: TextAlign.center,
+            ),
           ),
         ));
   }
