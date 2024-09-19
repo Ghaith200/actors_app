@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gallery_app/presentation_layer/screens/Settings.dart';
+import 'package:gallery_app/presentation_layer/screens/settings.dart';
 import 'package:gallery_app/presentation_layer/widgets/my_drawer_tile.dart';
 
 class MyDrawer extends StatelessWidget {

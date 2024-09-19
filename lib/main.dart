@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gallery_app/app_route.dart';
+import 'package:gallery_app/data/Services/api_services.dart';
 import 'package:gallery_app/presentation_layer/themes/theme_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -19,12 +20,10 @@ class AppInitializer extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
 
-    // Return a FutureBuilder to ensure the theme is loaded
     return FutureBuilder(
       future: themeProvider.loadThemeFromPreferences(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          // Show splash screen or loading while waiting
           return const Center(child: CircularProgressIndicator());
         } else {
           return GalleryApp(appRoute: AppRoute());
@@ -35,12 +34,15 @@ class AppInitializer extends StatelessWidget {
 }
 
 class GalleryApp extends StatelessWidget {
-  final AppRoute appRoute; // Custom app routes
+ 
+  final AppRoute appRoute;
 
-  const GalleryApp({super.key, required this.appRoute});
+   GalleryApp({super.key, required this.appRoute});
 
   @override
   Widget build(BuildContext context) {
+    ApiServices apiServices = ApiServices() ;
+    apiServices.getHomePage();
     return MaterialApp(
       theme: Provider.of<ThemeProvider>(context).themeData,
       debugShowCheckedModeBanner: false,

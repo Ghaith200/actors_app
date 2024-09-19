@@ -1,29 +1,93 @@
-// ignore_for_file: non_constant_identifier_names
+class HomePageModel {
+  bool? adult;
+  int? gender;
+  int? id;
+  String? knownForDepartment;
+  String? name;
+  String? originalName;
+  double? popularity;
+  String? profilePath;
+  List<KnownFor>? knownFor;
 
-class Wallpaper {
-  late int wallpaper_id;
-  late int wallpaper_width;
-  late int wallpaper_height;
-  late String wallpaper_url;
-  late String wallpaper_photographer;
-  late String wallpaper_photographer_url;
-  late int wallpaper_photographer_id;
-  late String wallpaper_avg_color;
-  late Map wallpaper_src;
-  late bool wallpaper_liked;
-  late String wallpaper_alt;
+  HomePageModel(
+      {this.adult,
+      this.gender,
+      this.id,
+      this.knownForDepartment,
+      this.name,
+      this.originalName,
+      this.popularity,
+      this.profilePath,
+      this.knownFor});
 
-  Wallpaper.fromjson(Map<String, dynamic> json) {
-    wallpaper_id = json['id'];
-    wallpaper_width = json['width'];
-    wallpaper_height = json['height'];
-    wallpaper_url = json['url'];
-    wallpaper_photographer = json['photographer'];
-    wallpaper_photographer_url = json['photographer_url'];
-    wallpaper_photographer_id = json['photographer_id'];
-    wallpaper_avg_color = json['avg_color'];
-    wallpaper_src = json['src'];
-    wallpaper_liked = json['liked'];
-    wallpaper_alt = json['alt'];
+  HomePageModel.fromJson(Map<String, dynamic> json) {
+    adult = json['adult'];
+    gender = json['gender'];
+    id = json['id'];
+    knownForDepartment = json['known_for_department'];
+    name = json['name'];
+    originalName = json['original_name'];
+    popularity = json['popularity'];
+    profilePath = json['profile_path'];
+    if (json['known_for'] != null) {
+      knownFor = <KnownFor>[];
+      json['known_for'].forEach((v) {
+        knownFor!.add(new KnownFor.fromJson(v));
+      });
+    }
+  }
+
+}
+
+class KnownFor {
+  String? backdropPath;
+  int? id;
+  String? title;
+  String? originalTitle;
+  String? overview;
+  String? posterPath;
+  String? mediaType;
+  bool? adult;
+  String? originalLanguage;
+  List<int>? genreIds;
+  double? popularity;
+  String? releaseDate;
+  bool? video;
+  double? voteAverage;
+  int? voteCount;
+
+  KnownFor(
+      {this.backdropPath,
+      this.id,
+      this.title,
+      this.originalTitle,
+      this.overview,
+      this.posterPath,
+      this.mediaType,
+      this.adult,
+      this.originalLanguage,
+      this.genreIds,
+      this.popularity,
+      this.releaseDate,
+      this.video,
+      this.voteAverage,
+      this.voteCount});
+
+  KnownFor.fromJson(Map<String, dynamic> json) {
+    backdropPath = json['backdrop_path'];
+    id = json['id'];
+    title = json['title'];
+    originalTitle = json['original_title'];
+    overview = json['overview'];
+    posterPath = json['poster_path'];
+    mediaType = json['media_type'];
+    adult = json['adult'];
+    originalLanguage = json['original_language'];
+    genreIds = json['genre_ids'].cast<int>();
+    popularity = json['popularity'];
+    releaseDate = json['release_date'];
+    video = json['video'];
+    voteAverage = json['vote_average'];
+    voteCount = json['vote_count'];
   }
 }

@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:gallery_app/Constants/my_colors.dart';
 import 'package:gallery_app/data/Services/api_services.dart';
 import 'package:gallery_app/data/models/home_page_model.dart';
+import 'package:gallery_app/data/models/images_model.dart';
 import 'package:gallery_app/presentation_layer/widgets/my_drawer.dart';
+import 'package:gallery_app/presentation_layer/widgets/my_progress_indecator.dart';
 import 'package:gallery_app/presentation_layer/widgets/wallpaper_widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,78 +17,43 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late List<Wallpaper> allWallpapers;
-  ScrollController _controller = ScrollController();
-  bool isLoadingMore = false;
+  late List<HomePageModel> home_page_model = [];
+  
   ApiServices apiServices = ApiServices();
 
   @override
   void initState() {
     super.initState();
-    allWallpapers = [];
-    _controller = ScrollController();
-    _controller.addListener(_scrollListener);
-    _fetchInitialWallpapers();
+    fetchData();
   }
 
-  void _scrollListener() {
-    if (_controller.position.pixels == _controller.position.maxScrollExtent &&
-        !isLoadingMore) {
-      _fetchMoreWallpapers();
-    }
-  }
+  void fetchData() async {
+    final data = await apiServices.getHomePage();
 
-  void _fetchInitialWallpapers() async {
-    List<dynamic> wallpapers = await apiServices.getWallpapers();
     setState(() {
-      allWallpapers = wallpapers.map((w) => Wallpaper.fromjson(w)).toList();
+      home_page_model =
+          data.map((item) => HomePageModel.fromJson(item)).toList();
     });
   }
 
-  void _fetchMoreWallpapers() async {
-    setState(() {
-      isLoadingMore = true;
-    });
-
-    apiServices.incrementPage();
-
-    List<dynamic> newWallpapers = await apiServices.getWallpapers();
-
-    setState(() {
-      allWallpapers.addAll(newWallpapers
-          .map((w) => Wallpaper.fromjson(w))
-          .toList()); // Append new data
-      isLoadingMore = false;
-    });
-  }
-
+  
   Widget buildBlocWidget() {
-    return allWallpapers.isEmpty
-        ? showLoadingIndicator()
-        : buildLoadedListWidget();
+    return home_page_model.isEmpty
+        ? showLoadingIndicator() 
+        : buildLoadedListWidget(); 
   }
 
   Widget showLoadingIndicator() {
     return const Center(
-      child: CircularProgressIndicator(
-        color: MyColors.myYellow,
-      ),
+      child: MyCircleProgressIndecator(),
     );
   }
 
   Widget buildLoadedListWidget() {
     return SingleChildScrollView(
-      controller: _controller,
       child: Column(
         children: [
           buildWallpaperList(),
-          if (isLoadingMore) // Show loading indicator when fetching more data
-            const Padding(
-              padding: EdgeInsets.all(10),
-              child: CircularProgressIndicator(
-                color: MyColors.myYellow,
-              ),
-            ),
         ],
       ),
     );
@@ -101,17 +70,14 @@ class _HomePageState extends State<HomePage> {
       shrinkWrap: true,
       physics: const ClampingScrollPhysics(),
       padding: EdgeInsets.zero,
-      itemCount: allWallpapers.length,
+      itemCount: home_page_model.length, 
       itemBuilder: (context, index) {
-        return WallpaperWidget(wallpaper: allWallpapers[index]);
+        return WallpaperWidget(
+          homePageModel: home_page_model[index],
+          
+        );
       },
     );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 
   @override
@@ -127,7 +93,7 @@ class _HomePageState extends State<HomePage> {
           ),
           backgroundColor: MyColors.myYellow,
           leading: Builder(
-            // Wraped the IconButton with Builder to provide the correct context
+            // Wrap IconButton with Builder to provide correct context
             builder: (context) {
               return IconButton(
                 icon: const Icon(
@@ -142,9 +108,7 @@ class _HomePageState extends State<HomePage> {
           ),
           actions: [
             IconButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed('/SearchPage');
-              },
+              onPressed: () {},
               icon: const Icon(
                 Icons.search,
                 color: MyColors.myGrey,
@@ -152,8 +116,8 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
+        // Display the bloc widget (either loading or data)
         body: Container(
-            // ignore: deprecated_member_use
             color: Theme.of(context).colorScheme.background,
             child: buildBlocWidget()),
       ),

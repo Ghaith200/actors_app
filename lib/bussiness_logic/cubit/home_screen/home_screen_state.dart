@@ -5,7 +5,7 @@ sealed class HomeScreenState {}
 
 final class HomeScreenInitial extends HomeScreenState {}
 final class HomeScreenloaded extends HomeScreenState {
-  final List<Wallpaper> wallpaper ;
+  final List<HomePageModel> wallpaper ;
 
   HomeScreenloaded(this.wallpaper);
 }

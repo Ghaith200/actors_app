@@ -2,11 +2,16 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gallery_app/Constants/my_colors.dart';
 import 'package:gallery_app/data/models/home_page_model.dart';
+import 'package:gallery_app/data/models/images_model.dart';
 import 'package:gallery_app/presentation_layer/screens/details_page.dart';
 
 class WallpaperWidget extends StatelessWidget {
-  final Wallpaper wallpaper;
-  const WallpaperWidget({super.key, required this.wallpaper});
+  final HomePageModel homePageModel;
+
+  const WallpaperWidget({
+    super.key,
+    required this.homePageModel,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +28,10 @@ class WallpaperWidget extends StatelessWidget {
           child: InkWell(
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => DetailsPage(wallpaper: wallpaper),
+                builder: (context) => DetailsPage(
+                  wallpaper: homePageModel,
+                  imagesId: homePageModel.id,
+                ),
               ));
             },
             child: Container(
@@ -31,13 +39,11 @@ class WallpaperWidget extends StatelessWidget {
                 decoration: const BoxDecoration(
                   color: MyColors.myGrey,
                 ),
-                child: CachedNetworkImage(
-                  imageUrl: wallpaper.wallpaper_src['original'],
-                  fit: BoxFit.cover,
-                  placeholder: (context, url) =>
-                      Image.asset('assets/images/Loading.gif'),
-                  errorWidget: (context, url, error) =>
-                      const Icon(Icons.broken_image_outlined),
+                child: Center(
+                  child: Text(
+                    "${homePageModel.name}",
+                    style: const TextStyle(color: MyColors.myWhite),
+                  ),
                 )),
           ),
           footer: Container(
@@ -46,9 +52,9 @@ class WallpaperWidget extends StatelessWidget {
                 horizontal: 15, vertical: 10),
             color: Colors.black54,
             alignment: Alignment.bottomCenter,
-            child: wallpaper.wallpaper_alt.isEmpty
+            child: homePageModel.gender!.isEven
                 ? const Text(
-                    'No Description',
+                    'Female',
                     style: TextStyle(
                         height: 1.3,
                         fontSize: 16,
@@ -58,9 +64,9 @@ class WallpaperWidget extends StatelessWidget {
                     maxLines: 1,
                     textAlign: TextAlign.center,
                   )
-                : Text(
-                    wallpaper.wallpaper_alt,
-                    style: const TextStyle(
+                : const Text(
+                    'Male',
+                    style: TextStyle(
                         height: 1.3,
                         fontSize: 16,
                         fontWeight: FontWeight.bold,

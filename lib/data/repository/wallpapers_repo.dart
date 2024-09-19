@@ -3,12 +3,13 @@ import 'package:gallery_app/data/Services/api_services.dart';
 import 'package:gallery_app/data/models/home_page_model.dart';
 
 class WallpapersRepo {
-  final  ApiServices apiServices ;
+  final ApiServices apiServices;
 
   WallpapersRepo(this.apiServices);
-  Future<List<Wallpaper>> getWallpapers() async {
-   final wallpapers = await apiServices.getWallpapers();
-   return wallpapers.map((wallpapers) => Wallpaper.fromjson(wallpapers)).toList(); 
+  Future<List<HomePageModel>> getHomePage() async {
+    final wallpapers = await apiServices.getHomePage();
+    return wallpapers
+        .map((wallpapers) => HomePageModel.fromJson(wallpapers))
+        .toList();
   }
-
 }
