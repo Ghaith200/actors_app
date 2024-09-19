@@ -31,7 +31,7 @@ class WallpaperWidget extends StatelessWidget {
               Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => DetailsPage(
                   wallpaper: homePageModel,
-                  imagesId: homePageModel.id,
+                  imagesId: homePageModel.id!,
                 ),
               ));
             },
@@ -44,7 +44,9 @@ class WallpaperWidget extends StatelessWidget {
                   imageUrl:
                       'https://image.tmdb.org/t/p/w500${homePageModel.profilePath}',
                   fit: BoxFit.cover,
-                  placeholder: (context, url) => MyCircleProgressIndecator(),
+                  placeholder: (context, url) => Center(
+                    child: CircularProgressIndicator(),
+                  ),
                 )),
           ),
           footer: Container(

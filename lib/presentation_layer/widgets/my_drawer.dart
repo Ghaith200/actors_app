@@ -45,6 +45,14 @@ class MyDrawer extends StatelessWidget {
               ))
             },
           ),
+          MyDrawerTile(
+            text: "F a v o r i t e s",
+            icon: Icons.favorite,
+            onTap: () => {
+              
+              // ToDo: add favorites Here !!
+            },
+          ),
           const Spacer(),
           // logout list tile
           MyDrawerTile(

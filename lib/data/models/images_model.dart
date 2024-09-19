@@ -1,9 +1,11 @@
+import 'dart:ffi';
+
 class ImagesModel {
-  int? aspect_ratio;
+  double? aspect_ratio;
   int? height;
   String? iso_639_1;
   String? file_path;
-  int? vote_average;
+  double? vote_average;
   int? vote_count;
   int? width;
 

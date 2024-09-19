@@ -5,6 +5,7 @@ import 'package:gallery_app/Constants/my_colors.dart';
 import 'package:gallery_app/data/Services/api_services.dart';
 import 'package:gallery_app/data/models/home_page_model.dart';
 import 'package:gallery_app/data/models/images_model.dart';
+import 'package:gallery_app/data/repository/wallpapers_repo.dart';
 import 'package:gallery_app/presentation_layer/widgets/my_drawer.dart';
 import 'package:gallery_app/presentation_layer/widgets/my_progress_indecator.dart';
 import 'package:gallery_app/presentation_layer/widgets/wallpaper_widget.dart';
@@ -18,8 +19,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late List<HomePageModel> home_page_model = [];
-  
   ApiServices apiServices = ApiServices();
+  late WallpapersRepo wallpapersRepo;
 
   @override
   void initState() {
@@ -28,19 +29,16 @@ class _HomePageState extends State<HomePage> {
   }
 
   void fetchData() async {
-    final data = await apiServices.getHomePage();
+    wallpapersRepo = WallpapersRepo(apiServices);
+    home_page_model = await wallpapersRepo.getHomePage();
 
-    setState(() {
-      home_page_model =
-          data.map((item) => HomePageModel.fromJson(item)).toList();
-    });
+    setState(() {});
   }
 
-  
   Widget buildBlocWidget() {
     return home_page_model.isEmpty
-        ? showLoadingIndicator() 
-        : buildLoadedListWidget(); 
+        ? showLoadingIndicator()
+        : buildLoadedListWidget();
   }
 
   Widget showLoadingIndicator() {
@@ -70,11 +68,10 @@ class _HomePageState extends State<HomePage> {
       shrinkWrap: true,
       physics: const ClampingScrollPhysics(),
       padding: EdgeInsets.zero,
-      itemCount: home_page_model.length, 
+      itemCount: home_page_model.length,
       itemBuilder: (context, index) {
         return WallpaperWidget(
           homePageModel: home_page_model[index],
-          
         );
       },
     );

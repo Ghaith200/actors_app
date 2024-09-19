@@ -34,14 +34,13 @@ class AppInitializer extends StatelessWidget {
 }
 
 class GalleryApp extends StatelessWidget {
- 
   final AppRoute appRoute;
 
-   GalleryApp({super.key, required this.appRoute});
+  GalleryApp({super.key, required this.appRoute});
 
   @override
   Widget build(BuildContext context) {
-    ApiServices apiServices = ApiServices() ;
+    ApiServices apiServices = ApiServices();
     apiServices.getHomePage();
     return MaterialApp(
       theme: Provider.of<ThemeProvider>(context).themeData,
