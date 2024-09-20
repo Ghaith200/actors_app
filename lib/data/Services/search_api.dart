@@ -4,24 +4,23 @@ import 'package:dio/dio.dart';
 import 'package:gallery_app/Constants/api.dart';
 import 'package:gallery_app/Constants/api_key.dart';
 
-class SearchPicApi {
+class SearchApi {
   late Dio dio;
-  late String txt;
-  late String oriantation = '';
-  SearchPicApi({required this.txt, required this.oriantation}) {
+
+  SearchApi() {
     BaseOptions options = BaseOptions(
-      baseUrl: baseurl,
-      headers: {'Authorization': apiKey},
       receiveDataWhenStatusError: true,
     );
 
     dio = Dio(options);
   }
 
-  Future<List<dynamic>> searchPic() async {
+  Future<List<dynamic>> searchapi(String text) async {
     try {
-      Response response = await dio.get('search?query=$txt&per_page=10');
-      return response.data['photos'];
+      Response response = await dio.get(
+          'https://api.themoviedb.org/3/search/movie?query=${text}&api_key=2dfe23358236069710a379edd4c65a6b');
+      log(response.data['results'].toString());
+      return response.data['results'];
     } catch (e) {
       log(e.toString());
       return [];

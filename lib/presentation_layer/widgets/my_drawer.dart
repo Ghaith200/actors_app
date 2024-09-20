@@ -28,13 +28,21 @@ class MyDrawer extends StatelessWidget {
               color: Theme.of(context).colorScheme.primary,
             ),
           ),
-          //home list tiles
+          //home list tile
           MyDrawerTile(
             text: "H O M E",
             icon: Icons.home,
             onTap: () => Navigator.pop(context),
           ),
-          //settings list tiles
+          //Fav list tile
+          MyDrawerTile(
+            text: "F a v o r i t e s",
+            icon: Icons.favorite,
+            onTap: () => {
+              // ToDo: add favorites Here !!
+            },
+          ),
+          //settings list tile
           MyDrawerTile(
             text: "S E T T I N G S",
             icon: Icons.settings,
@@ -45,14 +53,7 @@ class MyDrawer extends StatelessWidget {
               ))
             },
           ),
-          MyDrawerTile(
-            text: "F a v o r i t e s",
-            icon: Icons.favorite,
-            onTap: () => {
-              
-              // ToDo: add favorites Here !!
-            },
-          ),
+
           const Spacer(),
           // logout list tile
           MyDrawerTile(

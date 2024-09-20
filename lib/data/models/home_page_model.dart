@@ -1,24 +1,24 @@
 class HomePageModel {
-  late bool adult;
-  late int gender;
-  late int id;
-  late String knownForDepartment;
-  late String name;
-  late String originalName;
-  late double popularity;
-  late String profilePath;
-  late List<KnownFor> knownFor;
+  int? gender;
+  bool? adult;
+  int? id;
+  String? knownForDepartment;
+  String? name;
+  String? originalName;
+  double? popularity;
+  String? profilePath;
+  List<KnownFor>? knownFor;
 
   HomePageModel(
-      {required this.adult,
-      required this.gender,
-      required this.id,
-      required this.knownForDepartment,
-      required this.name,
-      required this.originalName,
-      required this.popularity,
-      required this.profilePath,
-      required this.knownFor});
+      {this.adult,
+      this.gender,
+      this.id,
+      this.knownForDepartment,
+      this.name,
+      this.originalName,
+      this.popularity,
+      this.profilePath,
+      this.knownFor});
 
   HomePageModel.fromJson(Map<String, dynamic> json) {
     adult = json['adult'];

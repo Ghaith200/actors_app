@@ -31,6 +31,7 @@ class DetailsPage extends StatefulWidget {
 }
 
 class _DetailsPageState extends State<DetailsPage> {
+  bool _is_loading = true;
   ApiServices apiServices = ApiServices();
   @override
   void initState() {
@@ -45,6 +46,7 @@ class _DetailsPageState extends State<DetailsPage> {
     final info = await actorInfoRepo.getInfo();
     setState(() {
       widget.actorInfo = info;
+      _is_loading = false;
     });
   }
 
@@ -55,138 +57,135 @@ class _DetailsPageState extends State<DetailsPage> {
         appBar: AppBar(
           title: Text(
             widget.wallpaper.name!,
-            style: TextStyle(color: Theme.of(context).colorScheme.primary),
+            style: TextStyle(color: Theme.of(context).colorScheme.background),
           ),
-          backgroundColor: Theme.of(context).colorScheme.secondary,
+          backgroundColor: Theme.of(context).colorScheme.primary,
         ),
-        body: Container(
-          color: Theme.of(context).colorScheme.background,
-          child: ListView(
-            children: [
-              Column(
-                children: [
-                  CarouselSlider(
-                    options: CarouselOptions(
-                      height: MediaQuery.of(context).size.height * 0.6,
-                      autoPlay: true,
-                      enlargeCenterPage: true,
-                      pauseAutoPlayOnTouch: true,
-                      enlargeStrategy: CenterPageEnlargeStrategy.zoom,
-                    ),
-                    items: [
-                      for (int i = 0; i < widget.images.length; i++)
-                        Container(
-                          child: CachedNetworkImage(
-                            imageUrl:
-                                'https://image.tmdb.org/t/p/w500${widget.images[i].file_path}',
-                            placeholder: (context, url) =>
-                                MyCircleProgressIndecator(),
-                          ),
-                        ),
-                    ],
-                  ),
-                  MySperater(),
-                ],
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+        body: _is_loading == true
+            ? MyCircleProgressIndecator()
+            : Container(
+                color: Theme.of(context).colorScheme.background,
+                child: ListView(
                   children: [
-                    Row(
+                    Column(
                       children: [
-                        Text('Name : ',
+                        CarouselSlider(
+                          options: CarouselOptions(
+                            height: MediaQuery.of(context).size.height * 0.6,
+                            autoPlay: true,
+                            enlargeCenterPage: true,
+                            pauseAutoPlayOnTouch: true,
+                            enlargeStrategy: CenterPageEnlargeStrategy.zoom,
+                          ),
+                          items: [
+                            for (int i = 0; i < widget.images.length; i++)
+                              Container(
+                                child: CachedNetworkImage(
+                                  imageUrl:
+                                      'https://image.tmdb.org/t/p/w500${widget.images[i].file_path}',
+                                  placeholder: (context, url) =>
+                                      MyCircleProgressIndecator(),
+                                ),
+                              ),
+                          ],
+                        ),
+                        MySperater(),
+                      ],
+                    ),
+                    Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.wallpaper.name == null
+                                ? "No Name Found"
+                                : ' ${widget.wallpaper.name}',
+                            softWrap: true,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                color: Theme.of(context).colorScheme.primary,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          MySperater(),
+                          widget.actorInfo.alsoKnownAs == null ||
+                                  widget.actorInfo.alsoKnownAs!.isEmpty
+                              ? Container()
+                              : Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      child: Text(
+                                        'Also Known As : ',
+                                        style: TextStyle(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .primary,
+                                            fontSize: 25,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    Text(
+                                      widget.actorInfo.alsoKnownAs!.isEmpty
+                                          ? "No Also Known As"
+                                          : '${widget.actorInfo.alsoKnownAs}',
+                                    ),
+                                    MySperater(),
+                                  ],
+                                ),
+                          Container(
+                            margin: EdgeInsets.symmetric(vertical: 10),
+                            child: Text(
+                              'Biography : ',
+                              style: TextStyle(
+                                  color: Theme.of(context).colorScheme.primary,
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          Text(widget.actorInfo?.biography == null ||
+                                  widget.actorInfo?.biography == ''
+                              ? "We Don't Have a Bio For ${widget.actorInfo.name} "
+                              : '${widget.actorInfo?.biography}'),
+                          MySperater(),
+                          Row(
+                            children: [
+                              Text(
+                                'Birthday : ',
+                                style: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(widget.actorInfo?.birthday == null ||
+                                      widget.actorInfo?.birthday == ''
+                                  ? "No Birthday"
+                                  : '${widget.actorInfo?.birthday}'),
+                            ],
+                          ),
+                          MySperater(),
+                          Text(
+                            'Place of Birth : ',
                             style: TextStyle(
                                 color: Theme.of(context).colorScheme.primary,
                                 fontSize: 25,
-                                fontWeight: FontWeight.bold)),
-                        Text(
-                          widget.wallpaper.name == null
-                              ? "No Name Found"
-                              : ' ${widget.wallpaper.name}',
-                          softWrap: true,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              color: Theme.of(context).colorScheme.primary,
-                              fontSize: 20),
-                        ),
-                      ],
-                    ),
-                    MySperater(),
-                    widget.actorInfo.alsoKnownAs == null ||
-                            widget.actorInfo.alsoKnownAs!.isEmpty
-                        ? Container()
-                        : Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                child: Text(
-                                  'Also Known As : ',
-                                  style: TextStyle(
-                                      color:
-                                          Theme.of(context).colorScheme.primary,
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                              Text(
-                                widget.actorInfo.alsoKnownAs!.isEmpty
-                                    ? "No Also Known As"
-                                    : '${widget.actorInfo.alsoKnownAs}',
-                              ),
-                              MySperater(),
-                            ],
+                                fontWeight: FontWeight.bold),
                           ),
-                    Container(
-                      margin: EdgeInsets.symmetric(vertical: 10),
-                      child: Text(
-                        'Biography : ',
-                        style: TextStyle(
-                            color: Theme.of(context).colorScheme.primary,
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold),
+                          Text(widget.actorInfo?.placeOfBirth == null ||
+                                  widget.actorInfo?.placeOfBirth == ''
+                              ? "No Place of Birth"
+                              : '${widget.actorInfo?.placeOfBirth}'),
+                          MySperater(),
+                        ],
                       ),
-                    ),
-                    Text(widget.actorInfo?.biography == null ||
-                            widget.actorInfo?.biography == ''
-                        ? "No Bio "
-                        : '${widget.actorInfo?.biography}'),
-                    MySperater(),
-                    Row(
-                      children: [
-                        Text(
-                          'Birthday : ',
-                          style: TextStyle(
-                              color: Theme.of(context).colorScheme.primary,
-                              fontSize: 25,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Text(widget.actorInfo?.birthday == null ||
-                                widget.actorInfo?.birthday == ''
-                            ? "No Birthday"
-                            : '${widget.actorInfo?.birthday}'),
-                      ],
-                    ),
-                    MySperater(),
-                    Text(
-                      'Place of Birth : ',
-                      style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    Text(widget.actorInfo?.placeOfBirth == null ||
-                            widget.actorInfo?.placeOfBirth == ''
-                        ? "No Place of Birth"
-                        : '${widget.actorInfo?.placeOfBirth}'),
-                    MySperater(),
+                    )
                   ],
                 ),
-              )
-            ],
-          ),
-        ),
+              ),
       ),
     );
   }

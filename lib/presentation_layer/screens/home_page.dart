@@ -6,6 +6,7 @@ import 'package:gallery_app/data/Services/api_services.dart';
 import 'package:gallery_app/data/models/home_page_model.dart';
 import 'package:gallery_app/data/models/images_model.dart';
 import 'package:gallery_app/data/repository/wallpapers_repo.dart';
+import 'package:gallery_app/presentation_layer/screens/search_page.dart';
 import 'package:gallery_app/presentation_layer/widgets/my_drawer.dart';
 import 'package:gallery_app/presentation_layer/widgets/my_progress_indecator.dart';
 import 'package:gallery_app/presentation_layer/widgets/wallpaper_widget.dart';
@@ -105,7 +106,10 @@ class _HomePageState extends State<HomePage> {
           ),
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => SearchPage()));
+              },
               icon: const Icon(
                 Icons.search,
                 color: MyColors.myGrey,

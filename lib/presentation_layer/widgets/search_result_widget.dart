@@ -3,15 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:gallery_app/Constants/my_colors.dart';
 import 'package:gallery_app/data/models/home_page_model.dart';
 import 'package:gallery_app/data/models/images_model.dart';
+import 'package:gallery_app/data/models/search_model.dart';
 import 'package:gallery_app/presentation_layer/screens/details_page.dart';
 import 'package:gallery_app/presentation_layer/widgets/my_progress_indecator.dart';
 
-class WallpaperWidget extends StatelessWidget {
-  final HomePageModel homePageModel;
+class SearchWidget extends StatelessWidget {
+  final SearchModel searchModel;
 
-  const WallpaperWidget({
+  const SearchWidget({
     super.key,
-    required this.homePageModel,
+    required this.searchModel,
   });
 
   @override
@@ -30,8 +31,12 @@ class WallpaperWidget extends StatelessWidget {
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => DetailsPage(
-                  wallpaper: homePageModel,
-                  imagesId: homePageModel.id!,
+                  wallpaper: HomePageModel(
+                    id: searchModel.id,
+                    name: searchModel.title,
+                    profilePath: searchModel.posterPath,
+                  ),
+                  imagesId: searchModel.id!,
                 ),
               ));
             },
@@ -42,7 +47,8 @@ class WallpaperWidget extends StatelessWidget {
                 ),
                 child: CachedNetworkImage(
                   imageUrl:
-                      'https://image.tmdb.org/t/p/w500${homePageModel.profilePath}',
+                      'https://image.tmdb.org/t/p/w500${searchModel.posterPath}',
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                   fit: BoxFit.cover,
                   placeholder: (context, url) => Center(
                     child: CircularProgressIndicator(),
@@ -56,9 +62,9 @@ class WallpaperWidget extends StatelessWidget {
             color: Colors.black54,
             alignment: Alignment.bottomCenter,
             child: Text(
-              homePageModel.name == null
-                  ? 'We Dont Have a Name Yet'
-                  : homePageModel.name!,
+              searchModel.title == null
+                  ? 'We Dont Have a titles Yet'
+                  : searchModel.title!,
               style: TextStyle(
                   height: 1.3,
                   fontSize: 16,
