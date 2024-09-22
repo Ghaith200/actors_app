@@ -9,8 +9,8 @@ class SearchRepo {
   late String text ;
 
   SearchRepo(this.searchApi, this.homePageModel, this.text);
-  Future<List<SearchModel>> search() async {
-    final image = await searchApi.searchapi(text);
-    return image.map((image) => SearchModel.fromJson(image)).toList();
+  Future<List<HomePageModel>> search() async {
+    final image = await searchApi.searchPerson(text);
+    return image.map((image) => HomePageModel.fromJson(image)).toList();
   }
 }

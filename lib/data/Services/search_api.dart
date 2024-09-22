@@ -15,10 +15,10 @@ class SearchApi {
     dio = Dio(options);
   }
 
-  Future<List<dynamic>> searchapi(String text) async {
+  Future<List<dynamic>> searchPerson(String text) async {
     try {
       Response response = await dio.get(
-          'https://api.themoviedb.org/3/search/movie?query=${text}&api_key=2dfe23358236069710a379edd4c65a6b');
+          'https://api.themoviedb.org/3/search/person?query=${text}&api_key=2dfe23358236069710a379edd4c65a6b');
       log(response.data['results'].toString());
       return response.data['results'];
     } catch (e) {

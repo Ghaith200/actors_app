@@ -41,13 +41,14 @@ class WallpaperWidget extends StatelessWidget {
                   color: MyColors.myGrey,
                 ),
                 child: CachedNetworkImage(
-                  imageUrl:
-                      'https://image.tmdb.org/t/p/w500${homePageModel.profilePath}',
-                  fit: BoxFit.cover,
-                  placeholder: (context, url) => Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                )),
+                    imageUrl:
+                        'https://image.tmdb.org/t/p/w500${homePageModel.profilePath}',
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error))),
           ),
           footer: Container(
             width: double.infinity,

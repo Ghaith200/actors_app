@@ -8,11 +8,11 @@ import 'package:gallery_app/presentation_layer/screens/details_page.dart';
 import 'package:gallery_app/presentation_layer/widgets/my_progress_indecator.dart';
 
 class SearchWidget extends StatelessWidget {
-  final SearchModel searchModel;
+  final HomePageModel home_page_model;
 
   const SearchWidget({
     super.key,
-    required this.searchModel,
+    required this.home_page_model,
   });
 
   @override
@@ -32,11 +32,11 @@ class SearchWidget extends StatelessWidget {
               Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => DetailsPage(
                   wallpaper: HomePageModel(
-                    id: searchModel.id,
-                    name: searchModel.title,
-                    profilePath: searchModel.posterPath,
+                    id: home_page_model.id,
+                    name: home_page_model.name,
+                    profilePath: home_page_model.profilePath,
                   ),
-                  imagesId: searchModel.id!,
+                  imagesId: home_page_model.id!,
                 ),
               ));
             },
@@ -47,7 +47,7 @@ class SearchWidget extends StatelessWidget {
                 ),
                 child: CachedNetworkImage(
                   imageUrl:
-                      'https://image.tmdb.org/t/p/w500${searchModel.posterPath}',
+                      'https://image.tmdb.org/t/p/w500${home_page_model.profilePath}',
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                   fit: BoxFit.cover,
                   placeholder: (context, url) => Center(
@@ -62,9 +62,9 @@ class SearchWidget extends StatelessWidget {
             color: Colors.black54,
             alignment: Alignment.bottomCenter,
             child: Text(
-              searchModel.title == null
+              home_page_model.name == null
                   ? 'We Dont Have a titles Yet'
-                  : searchModel.title!,
+                  : home_page_model.name!,
               style: TextStyle(
                   height: 1.3,
                   fontSize: 16,

@@ -2,11 +2,13 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:gallery_app/Constants/my_colors.dart';
+import 'package:gallery_app/Constants/pageroute.dart';
 import 'package:gallery_app/data/Services/search_api.dart';
 import 'package:gallery_app/data/models/home_page_model.dart';
 import 'package:gallery_app/data/models/search_model.dart';
 import 'package:gallery_app/presentation_layer/widgets/my_progress_indecator.dart';
 import 'package:gallery_app/presentation_layer/widgets/search_result_widget.dart';
+import 'package:gallery_app/presentation_layer/widgets/wallpaper_widget.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -18,7 +20,7 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   final ScrollController _controller = ScrollController();
   TextEditingController searchController = TextEditingController();
-  late List<SearchModel> allWallpapers = [];
+  late List<HomePageModel> allWallpapers = [];
 
   Widget buildBlocWidget() {
     return allWallpapers.isEmpty && searchController.text.isNotEmpty
@@ -67,7 +69,7 @@ class _SearchPageState extends State<SearchPage> {
       padding: EdgeInsets.zero,
       itemCount: allWallpapers.length,
       itemBuilder: (context, index) {
-        return SearchWidget(searchModel: allWallpapers[index]);
+        return WallpaperWidget(homePageModel: allWallpapers[index]);
       },
     );
   }
@@ -105,10 +107,10 @@ class _SearchPageState extends State<SearchPage> {
                       onFieldSubmitted: (value) async {
                         allWallpapers.clear();
                         final image = await SearchApi()
-                            .searchapi(searchController.text.trim());
+                            .searchPerson(searchController.text.trim());
                         setState(() {
                           allWallpapers = image
-                              .map((image) => SearchModel.fromJson(image))
+                              .map((image) => HomePageModel.fromJson(image))
                               .toList();
                         });
                       },
