@@ -1,10 +1,8 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:gallery_app/Constants/my_colors.dart';
 import 'package:gallery_app/data/Services/api_services.dart';
 import 'package:gallery_app/data/models/home_page_model.dart';
-import 'package:gallery_app/data/models/images_model.dart';
 import 'package:gallery_app/data/repository/wallpapers_repo.dart';
 import 'package:gallery_app/presentation_layer/screens/search_page.dart';
 import 'package:gallery_app/presentation_layer/widgets/my_drawer.dart';
@@ -19,7 +17,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late List<HomePageModel> home_page_model = [];
+  late List<HomePageModel> homePageModel = [];
   ApiServices apiServices = ApiServices();
   late WallpapersRepo wallpapersRepo;
 
@@ -31,13 +29,13 @@ class _HomePageState extends State<HomePage> {
 
   void fetchData() async {
     wallpapersRepo = WallpapersRepo(apiServices);
-    home_page_model = await wallpapersRepo.getHomePage();
+    homePageModel = await wallpapersRepo.getHomePage();
 
     setState(() {});
   }
 
   Widget buildBlocWidget() {
-    return home_page_model.isEmpty
+    return homePageModel.isEmpty
         ? showLoadingIndicator()
         : buildLoadedListWidget();
   }
@@ -69,10 +67,10 @@ class _HomePageState extends State<HomePage> {
       shrinkWrap: true,
       physics: const ClampingScrollPhysics(),
       padding: EdgeInsets.zero,
-      itemCount: home_page_model.length,
+      itemCount: homePageModel.length,
       itemBuilder: (context, index) {
         return WallpaperWidget(
-          homePageModel: home_page_model[index],
+          homePageModel: homePageModel[index],
         );
       },
     );
@@ -108,7 +106,7 @@ class _HomePageState extends State<HomePage> {
             IconButton(
               onPressed: () {
                 Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => SearchPage()));
+                    MaterialPageRoute(builder: (context) => const SearchPage()));
               },
               icon: const Icon(
                 Icons.search,
