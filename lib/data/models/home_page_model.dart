@@ -28,7 +28,7 @@ class HomePageModel {
     name = json['name'];
     originalName = json['original_name'];
     popularity = json['popularity'];
-    profilePath = json['profile_path'];
+    profilePath = json['profilePath'];
     if (json['known_for'] != null) {
       knownFor = <KnownFor>[];
       json['known_for'].forEach((v) {
@@ -86,7 +86,7 @@ class KnownFor {
     popularity = json['popularity'];
     releaseDate = json['release_date'];
     video = json['video'];
-    voteAverage = json['vote_average'];
-    voteCount = json['vote_count'];
+    voteAverage = json['voteAverage'];
+    voteCount = json['voteCount'];
   }
 }

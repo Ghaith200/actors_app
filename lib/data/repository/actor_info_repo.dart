@@ -10,7 +10,7 @@ class ActorInfoRepo {
 
   Future<ActorInfoModel> getInfo() async {
     final Map<String, dynamic> info =
-        await apiServices.GetActorInfo(homePageModel.id!);
+        await apiServices.getActorInfo(homePageModel.id!);
 
     return ActorInfoModel.fromJson(info);
   }

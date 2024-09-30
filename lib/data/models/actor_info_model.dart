@@ -46,7 +46,7 @@ class ActorInfoModel {
       name: json['name'],
       placeOfBirth: json['place_of_birth'],
       popularity: json['popularity'].toDouble(),
-      profilePath: json['profile_path'],
+      profilePath: json['profilePath'],
     );
   }
 }

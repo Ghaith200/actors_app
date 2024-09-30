@@ -1,7 +1,5 @@
-import 'package:gallery_app/data/Services/api_services.dart';
 import 'package:gallery_app/data/Services/search_api.dart';
 import 'package:gallery_app/data/models/home_page_model.dart';
-import 'package:gallery_app/data/models/search_model.dart';
 
 class SearchRepo {
   final SearchApi searchApi;
