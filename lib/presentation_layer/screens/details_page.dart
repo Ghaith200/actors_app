@@ -28,7 +28,7 @@ class DetailsPage extends StatefulWidget {
 }
 
 class DetailsPageState extends State<DetailsPage> {
-  bool _is_loading = true;
+  bool _isloading = true;
   ApiServices apiServices = ApiServices();
   @override
   void initState() {
@@ -43,7 +43,7 @@ class DetailsPageState extends State<DetailsPage> {
     final info = await actorInfoRepo.getInfo();
     setState(() {
       widget.actorInfo = info;
-      _is_loading = false;
+      _isloading = false;
     });
   }
 
@@ -58,8 +58,8 @@ class DetailsPageState extends State<DetailsPage> {
           ),
           backgroundColor: Theme.of(context).colorScheme.primary,
         ),
-        body: _is_loading == true
-            ? MyCircleProgressIndecator()
+        body: _isloading == true
+            ? const MyCircleProgressIndecator()
             : Container(
                 color: Theme.of(context).colorScheme.background,
                 child: ListView(
@@ -81,17 +81,17 @@ class DetailsPageState extends State<DetailsPage> {
                                   imageUrl:
                                       'https://image.tmdb.org/t/p/w500${widget.images[i].filePath}',
                                   placeholder: (context, url) =>
-                                      MyCircleProgressIndecator(),
+                                      const MyCircleProgressIndecator(),
                                 ),
                               ),
                           ],
                         ),
-                        MySperater(),
+                        const MySperater(),
                       ],
                     ),
                     Container(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                          const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -107,7 +107,7 @@ class DetailsPageState extends State<DetailsPage> {
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold),
                           ),
-                          MySperater(),
+                          const MySperater(),
                           widget.actorInfo.alsoKnownAs == null ||
                                   widget.actorInfo.alsoKnownAs!.isEmpty
                               ? Container()
@@ -130,11 +130,11 @@ class DetailsPageState extends State<DetailsPage> {
                                           ? "No Also Known As"
                                           : '${widget.actorInfo.alsoKnownAs}',
                                     ),
-                                    MySperater(),
+                                    const MySperater(),
                                   ],
                                 ),
                           Container(
-                            margin: EdgeInsets.symmetric(vertical: 10),
+                            margin: const EdgeInsets.symmetric(vertical: 10),
                             child: Text(
                               'Biography : ',
                               style: TextStyle(
@@ -147,7 +147,7 @@ class DetailsPageState extends State<DetailsPage> {
                                   widget.actorInfo.biography == ''
                               ? "We Don't Have a Bio For ${widget.actorInfo.name} "
                               : '${widget.actorInfo.biography}'),
-                          MySperater(),
+                          const MySperater(),
                           Row(
                             children: [
                               Text(
@@ -164,7 +164,7 @@ class DetailsPageState extends State<DetailsPage> {
                                   : '${widget.actorInfo.birthday}'),
                             ],
                           ),
-                          MySperater(),
+                          const MySperater(),
                           Text(
                             'Place of Birth : ',
                             style: TextStyle(
@@ -176,7 +176,7 @@ class DetailsPageState extends State<DetailsPage> {
                                   widget.actorInfo.placeOfBirth == ''
                               ? "No Place of Birth"
                               : '${widget.actorInfo.placeOfBirth}'),
-                          MySperater(),
+                          const MySperater(),
                         ],
                       ),
                     )
