@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MySperater extends StatelessWidget {
@@ -7,7 +6,7 @@ class MySperater extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
+      margin: const EdgeInsets.symmetric(vertical: 10),
       color: Theme.of(context).colorScheme.primary,
       height: 1,
       width: MediaQuery.of(context).size.width * 0.9,
