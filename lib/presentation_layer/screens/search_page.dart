@@ -2,12 +2,9 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:gallery_app/Constants/my_colors.dart';
-import 'package:gallery_app/Constants/pageroute.dart';
 import 'package:gallery_app/data/Services/search_api.dart';
 import 'package:gallery_app/data/models/home_page_model.dart';
-import 'package:gallery_app/data/models/search_model.dart';
 import 'package:gallery_app/presentation_layer/widgets/my_progress_indecator.dart';
-import 'package:gallery_app/presentation_layer/widgets/search_result_widget.dart';
 import 'package:gallery_app/presentation_layer/widgets/wallpaper_widget.dart';
 
 class SearchPage extends StatefulWidget {
@@ -98,11 +95,11 @@ class _SearchPageState extends State<SearchPage> {
                     child: TextFormField(
                       controller: searchController,
                       cursorColor: MyColors.myGrey,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           focusColor: MyColors.myWhite,
                           hintText: 'Search',
-                          hintStyle: const TextStyle(color: MyColors.myGrey),
-                          border: const OutlineInputBorder(
+                          hintStyle: TextStyle(color: MyColors.myGrey),
+                          border: OutlineInputBorder(
                               borderSide: BorderSide.none)),
                       onFieldSubmitted: (value) async {
                         allWallpapers.clear();
