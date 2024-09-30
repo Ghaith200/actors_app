@@ -1,28 +1,30 @@
+import 'dart:ffi';
+
 class ImagesModel {
-  double? aspectRatio;
+  double? aspect_ratio;
   int? height;
   String? iso_639_1;
-  String? filePath;
-  double? voteAverage;
-  int? voteCount;
+  String? file_path;
+  double? vote_average;
+  int? vote_count;
   int? width;
 
   ImagesModel(
-      {this.aspectRatio,
+      {this.aspect_ratio,
       this.height,
       this.iso_639_1,
-      this.filePath,
-      this.voteAverage,
-      this.voteCount,
+      this.file_path,
+      this.vote_average,
+      this.vote_count,
       this.width});
 
   ImagesModel.fromJson(Map<String, dynamic> json) {
-    aspectRatio = json['aspectRatio'];
+    aspect_ratio = json['aspect_ratio'];
     height = json['height'];
     iso_639_1 = json['iso_639_1'];
-    filePath = json['filePath'];
-    voteAverage = json['voteAverage'];
-    voteCount = json['voteCount'];
+    file_path = json['file_path'];
+    vote_average = json['vote_average'];
+    vote_count = json['vote_count'];
     width = json['width'];
   }
 }

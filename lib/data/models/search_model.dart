@@ -43,7 +43,7 @@ class SearchModel {
     releaseDate = json['release_date'];
     title = json['title'];
     video = json['video'];
-    voteAverage = json['voteAverage'];
-    voteCount = json['voteCount'];
+    voteAverage = json['vote_average'];
+    voteCount = json['vote_count'];
   }
 }

@@ -1,7 +1,10 @@
+import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gallery_app/Constants/my_colors.dart';
 import 'package:gallery_app/data/Services/api_services.dart';
 import 'package:gallery_app/data/models/actor_info_model.dart';
 import 'package:gallery_app/data/models/home_page_model.dart';
@@ -24,11 +27,11 @@ class DetailsPage extends StatefulWidget {
   late ActorInfoModel actorInfo = ActorInfoModel();
 
   @override
-  DetailsPageState createState() => DetailsPageState();
+  _DetailsPageState createState() => _DetailsPageState();
 }
 
-class DetailsPageState extends State<DetailsPage> {
-  bool _isloading = true;
+class _DetailsPageState extends State<DetailsPage> {
+  bool _is_loading = true;
   ApiServices apiServices = ApiServices();
   @override
   void initState() {
@@ -43,7 +46,7 @@ class DetailsPageState extends State<DetailsPage> {
     final info = await actorInfoRepo.getInfo();
     setState(() {
       widget.actorInfo = info;
-      _isloading = false;
+      _is_loading = false;
     });
   }
 
@@ -58,8 +61,8 @@ class DetailsPageState extends State<DetailsPage> {
           ),
           backgroundColor: Theme.of(context).colorScheme.primary,
         ),
-        body: _isloading == true
-            ? const MyCircleProgressIndecator()
+        body: _is_loading == true
+            ? MyCircleProgressIndecator()
             : Container(
                 color: Theme.of(context).colorScheme.background,
                 child: ListView(
@@ -79,19 +82,19 @@ class DetailsPageState extends State<DetailsPage> {
                               Container(
                                 child: CachedNetworkImage(
                                   imageUrl:
-                                      'https://image.tmdb.org/t/p/w500${widget.images[i].filePath}',
+                                      'https://image.tmdb.org/t/p/w500${widget.images[i].file_path}',
                                   placeholder: (context, url) =>
-                                      const MyCircleProgressIndecator(),
+                                      MyCircleProgressIndecator(),
                                 ),
                               ),
                           ],
                         ),
-                        const MySperater(),
+                        MySperater(),
                       ],
                     ),
                     Container(
                       padding:
-                          const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -107,7 +110,7 @@ class DetailsPageState extends State<DetailsPage> {
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold),
                           ),
-                          const MySperater(),
+                          MySperater(),
                           widget.actorInfo.alsoKnownAs == null ||
                                   widget.actorInfo.alsoKnownAs!.isEmpty
                               ? Container()
@@ -130,11 +133,11 @@ class DetailsPageState extends State<DetailsPage> {
                                           ? "No Also Known As"
                                           : '${widget.actorInfo.alsoKnownAs}',
                                     ),
-                                    const MySperater(),
+                                    MySperater(),
                                   ],
                                 ),
                           Container(
-                            margin: const EdgeInsets.symmetric(vertical: 10),
+                            margin: EdgeInsets.symmetric(vertical: 10),
                             child: Text(
                               'Biography : ',
                               style: TextStyle(
@@ -143,11 +146,11 @@ class DetailsPageState extends State<DetailsPage> {
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
-                          Text(widget.actorInfo.biography == null ||
-                                  widget.actorInfo.biography == ''
+                          Text(widget.actorInfo?.biography == null ||
+                                  widget.actorInfo?.biography == ''
                               ? "We Don't Have a Bio For ${widget.actorInfo.name} "
-                              : '${widget.actorInfo.biography}'),
-                          const MySperater(),
+                              : '${widget.actorInfo?.biography}'),
+                          MySperater(),
                           Row(
                             children: [
                               Text(
@@ -158,13 +161,13 @@ class DetailsPageState extends State<DetailsPage> {
                                     fontSize: 25,
                                     fontWeight: FontWeight.bold),
                               ),
-                              Text(widget.actorInfo.birthday == null ||
-                                      widget.actorInfo.birthday == ''
+                              Text(widget.actorInfo?.birthday == null ||
+                                      widget.actorInfo?.birthday == ''
                                   ? "No Birthday"
-                                  : '${widget.actorInfo.birthday}'),
+                                  : '${widget.actorInfo?.birthday}'),
                             ],
                           ),
-                          const MySperater(),
+                          MySperater(),
                           Text(
                             'Place of Birth : ',
                             style: TextStyle(
@@ -172,11 +175,11 @@ class DetailsPageState extends State<DetailsPage> {
                                 fontSize: 25,
                                 fontWeight: FontWeight.bold),
                           ),
-                          Text(widget.actorInfo.placeOfBirth == null ||
-                                  widget.actorInfo.placeOfBirth == ''
+                          Text(widget.actorInfo?.placeOfBirth == null ||
+                                  widget.actorInfo?.placeOfBirth == ''
                               ? "No Place of Birth"
-                              : '${widget.actorInfo.placeOfBirth}'),
-                          const MySperater(),
+                              : '${widget.actorInfo?.placeOfBirth}'),
+                          MySperater(),
                         ],
                       ),
                     )
@@ -187,3 +190,106 @@ class DetailsPageState extends State<DetailsPage> {
     );
   }
 }
+// import 'dart:developer';
+// import 'package:cached_network_image/cached_network_image.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter_file_downloader/flutter_file_downloader.dart';
+// import 'package:gallery_app/Constants/my_colors.dart';
+// import 'package:gallery_app/data/models/home_page_model.dart';
+// import 'package:gallery_app/presentation_layer/widgets/custom_circle_progress_indecator.dart';
+
+// class DetailsPage extends StatefulWidget {
+//   final HomePage wallpaper;
+//   const DetailsPage({super.key, required this.wallpaper});
+
+//   @override
+//   State<DetailsPage> createState() => _DetailsPageState();
+// }
+
+// class _DetailsPageState extends State<DetailsPage> {
+//   double? _progress;
+//   @override
+//   Widget build(BuildContext context) {
+//     return SafeArea(
+//       child: Scaffold(
+//         appBar: AppBar(
+//           title: Text(
+//             widget.wallpaper.name!,
+//             style: TextStyle(color: Theme.of(context).colorScheme.primary),
+//           ),
+//           backgroundColor: MyColors.myYellow,
+//         ),
+//         body: Container(
+//           // ignore: deprecated_member_use
+//           color: Theme.of(context).colorScheme.background,
+//           child: ListView(
+//             children: [
+//               SizedBox(
+//                 width: double.infinity,
+//                 height: 400,
+//               ),
+//               ListTile(
+//                 title: Text(
+//                   widget.wallpaper.wallpaper_alt.isEmpty
+//                       ? "No Discription"
+//                       : widget.wallpaper.wallpaper_alt,
+//                   softWrap: true,
+//                   maxLines: 2,
+//                   overflow: TextOverflow.ellipsis,
+//                   style:
+//                       TextStyle(color: Theme.of(context).colorScheme.primary),
+//                 ),
+//                 subtitle: Text(
+//                   widget.wallpaper.wallpaper_photographer,
+//                   style:
+//                       TextStyle(color: Theme.of(context).colorScheme.primary),
+//                 ),
+//                 trailing: widget.wallpaper.wallpaper_liked
+//                     ? const Icon(
+//                         Icons.favorite,
+//                         color: Colors.red,
+//                       )
+//                     : const Icon(
+//                         Icons.favorite_border,
+//                         color: Colors.red,
+//                       ),
+//               ),
+//               Container(
+//                 padding:
+//                     const EdgeInsets.symmetric(horizontal: 90, vertical: 10),
+//                 child: _progress != null
+//                     ? const CustomCircleProgressIndecator()
+//                     : ElevatedButton(
+//                         style: ButtonStyle(
+//                             backgroundColor: WidgetStateProperty.all(
+//                                 Theme.of(context).colorScheme.primary),
+//                             foregroundColor:
+//                                 WidgetStateProperty.all(MyColors.myGrey)),
+//                         onPressed: () {
+//                           FileDownloader.downloadFile(
+//                               url: widget.wallpaper.wallpaper_src['original'],
+//                               onProgress: (name, progress) {
+//                                 setState(() {
+//                                   _progress = progress;
+//                                 });
+//                               },
+//                               onDownloadCompleted: (value) {
+//                                 log('path  $value ');
+//                                 setState(() {
+//                                   _progress = null;
+//                                 });
+//                               });
+//                         },
+//                         child: Icon(
+//                           Icons.download,
+//                           color: Theme.of(context).colorScheme.tertiary,
+//                         ),
+//                       ),
+//               )
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }

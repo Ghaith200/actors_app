@@ -2,7 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gallery_app/Constants/my_colors.dart';
 import 'package:gallery_app/data/models/home_page_model.dart';
+import 'package:gallery_app/data/models/images_model.dart';
 import 'package:gallery_app/presentation_layer/screens/details_page.dart';
+import 'package:gallery_app/presentation_layer/widgets/my_progress_indecator.dart';
 
 class WallpaperWidget extends StatelessWidget {
   final HomePageModel homePageModel;
@@ -42,7 +44,7 @@ class WallpaperWidget extends StatelessWidget {
                     imageUrl:
                         'https://image.tmdb.org/t/p/w500${homePageModel.profilePath}',
                     fit: BoxFit.cover,
-                    placeholder: (context, url) => const Center(
+                    placeholder: (context, url) => Center(
                           child: CircularProgressIndicator(),
                         ),
                     errorWidget: (context, url, error) =>
@@ -58,7 +60,7 @@ class WallpaperWidget extends StatelessWidget {
               homePageModel.name == null
                   ? 'We Dont Have a Name Yet'
                   : homePageModel.name!,
-              style: const TextStyle(
+              style: TextStyle(
                   height: 1.3,
                   fontSize: 16,
                   fontWeight: FontWeight.bold,

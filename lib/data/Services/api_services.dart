@@ -1,6 +1,10 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:gallery_app/Constants/api.dart';
+import 'package:gallery_app/Constants/api_key.dart';
+import 'package:gallery_app/data/models/home_page_model.dart';
 
 class ApiServices {
   late Dio dio;
@@ -24,7 +28,7 @@ class ApiServices {
     }
   }
 
-  Future<Map<String, dynamic>> getActorInfo(int id) async {
+  Future<Map<String,dynamic>> GetActorInfo(int id) async {
     try {
       Response response = await dio.get(
           'https://api.themoviedb.org/3/person/$id?api_key=2dfe23358236069710a379edd4c65a6b');
@@ -35,7 +39,7 @@ class ApiServices {
     }
   }
 
-  Future<List<dynamic>> getImages(int id) async {
+  Future<List<dynamic>> GetImages(int id) async {
     try {
       Response response = await dio.get(
           'https://api.themoviedb.org/3/person/$id/images?api_key=2dfe23358236069710a379edd4c65a6b');
