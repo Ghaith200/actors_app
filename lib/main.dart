@@ -36,7 +36,7 @@ class AppInitializer extends StatelessWidget {
 class GalleryApp extends StatelessWidget {
   final AppRoute appRoute;
 
-  GalleryApp({super.key, required this.appRoute});
+  const GalleryApp({super.key, required this.appRoute});
 
   @override
   Widget build(BuildContext context) {
