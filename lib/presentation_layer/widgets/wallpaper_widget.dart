@@ -42,7 +42,7 @@ class WallpaperWidget extends StatelessWidget {
                     imageUrl:
                         'https://image.tmdb.org/t/p/w500${homePageModel.profilePath}',
                     fit: BoxFit.cover,
-                    placeholder: (context, url) => Center(
+                    placeholder: (context, url) => const Center(
                           child: CircularProgressIndicator(),
                         ),
                     errorWidget: (context, url, error) =>
@@ -58,7 +58,7 @@ class WallpaperWidget extends StatelessWidget {
               homePageModel.name == null
                   ? 'We Dont Have a Name Yet'
                   : homePageModel.name!,
-              style: TextStyle(
+              style: const TextStyle(
                   height: 1.3,
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
