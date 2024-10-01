@@ -1,14 +1,14 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:gallery_app/Constants/my_colors.dart';
-import 'package:gallery_app/Constants/pageroute.dart';
+import 'package:gallery_app/Core/helpers/my_colors.dart';
+import 'package:gallery_app/Core/helpers/pageroute.dart';
 import 'package:gallery_app/data/Services/search_api.dart';
 import 'package:gallery_app/data/models/home_page_model.dart';
 import 'package:gallery_app/data/models/search_model.dart';
-import 'package:gallery_app/presentation_layer/widgets/my_progress_indecator.dart';
-import 'package:gallery_app/presentation_layer/widgets/search_result_widget.dart';
-import 'package:gallery_app/presentation_layer/widgets/wallpaper_widget.dart';
+import 'package:gallery_app/Core/widgets/my_progress_indecator.dart';
+import 'package:gallery_app/Core/widgets/search_result_widget.dart';
+import 'package:gallery_app/Core/widgets/wallpaper_widget.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -81,7 +81,7 @@ class _SearchPageState extends State<SearchPage> {
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
         child: Container(
-          color: MyColors.myYellow,
+          color: MyColors.myBlue,
           child: Column(
             children: [
               Row(

@@ -1,17 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:gallery_app/Constants/my_colors.dart';
+import 'package:gallery_app/Core/helpers/my_colors.dart';
 import 'package:gallery_app/data/models/home_page_model.dart';
-import 'package:gallery_app/data/models/images_model.dart';
-import 'package:gallery_app/presentation_layer/screens/details_page.dart';
-import 'package:gallery_app/presentation_layer/widgets/my_progress_indecator.dart';
+import 'package:gallery_app/Features/details/ui/details_page.dart';
 
-class WallpaperWidget extends StatelessWidget {
-  final HomePageModel homePageModel;
+class SearchWidget extends StatelessWidget {
+  final HomePageModel home_page_model;
 
-  const WallpaperWidget({
+  const SearchWidget({
     super.key,
-    required this.homePageModel,
+    required this.home_page_model,
   });
 
   @override
@@ -30,8 +28,12 @@ class WallpaperWidget extends StatelessWidget {
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => DetailsPage(
-                  wallpaper: homePageModel,
-                  imagesId: homePageModel.id!,
+                  wallpaper: HomePageModel(
+                    id: home_page_model.id,
+                    name: home_page_model.name,
+                    profilePath: home_page_model.profilePath,
+                  ),
+                  imagesId: home_page_model.id!,
                 ),
               ));
             },
@@ -41,14 +43,14 @@ class WallpaperWidget extends StatelessWidget {
                   color: MyColors.myGrey,
                 ),
                 child: CachedNetworkImage(
-                    imageUrl:
-                        'https://image.tmdb.org/t/p/w500${homePageModel.profilePath}',
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) => Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.error))),
+                  imageUrl:
+                      'https://image.tmdb.org/t/p/w500${home_page_model.profilePath}',
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) => const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                )),
           ),
           footer: Container(
             width: double.infinity,
@@ -57,10 +59,10 @@ class WallpaperWidget extends StatelessWidget {
             color: Colors.black54,
             alignment: Alignment.bottomCenter,
             child: Text(
-              homePageModel.name == null
-                  ? 'We Dont Have a Name Yet'
-                  : homePageModel.name!,
-              style: TextStyle(
+              home_page_model.name == null
+                  ? 'We Dont Have a titles Yet'
+                  : home_page_model.name!,
+              style: const TextStyle(
                   height: 1.3,
                   fontSize: 16,
                   fontWeight: FontWeight.bold,

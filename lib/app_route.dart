@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gallery_app/Constants/pageroute.dart';
-import 'package:gallery_app/bussiness_logic/cubit/home_screen/home_screen_cubit.dart';
+import 'package:gallery_app/Core/helpers/pageroute.dart';
+import 'package:gallery_app/Features/home/logic/cubit/home_screen/home_screen_cubit.dart';
 import 'package:gallery_app/data/Services/api_services.dart';
 import 'package:gallery_app/data/repository/wallpapers_repo.dart';
-import 'package:gallery_app/presentation_layer/screens/home_page.dart';
+import 'package:gallery_app/Features/details/ui/details_page.dart';
+import 'package:gallery_app/Features/home/ui/home_page.dart';
 
 class AppRoute {
   late WallpapersRepo wallpapersRepo;
@@ -17,7 +18,7 @@ class AppRoute {
     switch (settings.name) {
       case homePage:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
+          builder: (context) => BlocProvider(
               create: (BuildContext context) => HomeScreenCubit(wallpapersRepo),
               child: const HomePage()),
         );

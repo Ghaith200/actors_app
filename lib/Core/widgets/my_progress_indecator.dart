@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gallery_app/Constants/my_colors.dart';
+import 'package:gallery_app/Core/helpers/my_colors.dart';
 
 class MyCircleProgressIndecator extends StatelessWidget {
   const MyCircleProgressIndecator({super.key});
@@ -8,7 +8,7 @@ class MyCircleProgressIndecator extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Center(
       child: CircularProgressIndicator(
-        color: MyColors.myYellow,
+        color: MyColors.myBlue,
         backgroundColor: MyColors.myGrey,
       ),
     );

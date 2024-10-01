@@ -1,9 +1,5 @@
-import 'dart:convert';
 import 'dart:developer';
-
 import 'package:dio/dio.dart';
-import 'package:gallery_app/Constants/api.dart';
-import 'package:gallery_app/Constants/api_key.dart';
 import 'package:gallery_app/data/models/home_page_model.dart';
 
 class ApiServices {
@@ -11,8 +7,11 @@ class ApiServices {
 
   ApiServices() {
     BaseOptions options = BaseOptions(
-      receiveDataWhenStatusError: true,
-    );
+        receiveDataWhenStatusError: true,
+        baseUrl: 'https://api.themoviedb.org/3/',
+        headers: {
+          'api_key': '2dfe23358236069710a379edd4c65a6b',
+        });
 
     dio = Dio(options);
   }
@@ -20,7 +19,9 @@ class ApiServices {
   Future<List<dynamic>> getHomePage() async {
     try {
       Response response = await dio.get(
-          'https://api.themoviedb.org/3/person/popular?api_key=2dfe23358236069710a379edd4c65a6b');
+        'person/popular',
+        queryParameters: {'api_key': '2dfe23358236069710a379edd4c65a6b'},
+      );
       return response.data['results'];
     } catch (e) {
       log('ERROR:${e.toString()}');
@@ -28,10 +29,12 @@ class ApiServices {
     }
   }
 
-  Future<Map<String,dynamic>> GetActorInfo(int id) async {
+  Future<Map<String, dynamic>> GetActorInfo(int id) async {
     try {
       Response response = await dio.get(
-          'https://api.themoviedb.org/3/person/$id?api_key=2dfe23358236069710a379edd4c65a6b');
+        '3/person/$id',
+        queryParameters: {'api_key': '2dfe23358236069710a379edd4c65a6b'},
+      );
       return response.data;
     } catch (e) {
       log('ERROR:${e.toString()}');
@@ -41,8 +44,8 @@ class ApiServices {
 
   Future<List<dynamic>> GetImages(int id) async {
     try {
-      Response response = await dio.get(
-          'https://api.themoviedb.org/3/person/$id/images?api_key=2dfe23358236069710a379edd4c65a6b');
+      Response response = await dio.get('person/$id/images',
+          queryParameters: {'api_key': '2dfe23358236069710a379edd4c65a6b'});
       return response.data['profiles'];
     } catch (e) {
       log('ERROR:${e.toString()}');

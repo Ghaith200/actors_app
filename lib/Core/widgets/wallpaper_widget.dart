@@ -1,18 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:gallery_app/Constants/my_colors.dart';
+import 'package:gallery_app/Core/helpers/my_colors.dart';
 import 'package:gallery_app/data/models/home_page_model.dart';
-import 'package:gallery_app/data/models/images_model.dart';
-import 'package:gallery_app/data/models/search_model.dart';
-import 'package:gallery_app/presentation_layer/screens/details_page.dart';
-import 'package:gallery_app/presentation_layer/widgets/my_progress_indecator.dart';
+import 'package:gallery_app/Features/details/ui/details_page.dart';
 
-class SearchWidget extends StatelessWidget {
-  final HomePageModel home_page_model;
+class WallpaperWidget extends StatelessWidget {
+  final HomePageModel homePageModel;
 
-  const SearchWidget({
+  const WallpaperWidget({
     super.key,
-    required this.home_page_model,
+    required this.homePageModel,
   });
 
   @override
@@ -31,12 +28,8 @@ class SearchWidget extends StatelessWidget {
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => DetailsPage(
-                  wallpaper: HomePageModel(
-                    id: home_page_model.id,
-                    name: home_page_model.name,
-                    profilePath: home_page_model.profilePath,
-                  ),
-                  imagesId: home_page_model.id!,
+                  wallpaper: homePageModel,
+                  imagesId: homePageModel.id!,
                 ),
               ));
             },
@@ -46,14 +39,14 @@ class SearchWidget extends StatelessWidget {
                   color: MyColors.myGrey,
                 ),
                 child: CachedNetworkImage(
-                  imageUrl:
-                      'https://image.tmdb.org/t/p/w500${home_page_model.profilePath}',
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
-                  fit: BoxFit.cover,
-                  placeholder: (context, url) => Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                )),
+                    imageUrl:
+                        'https://image.tmdb.org/t/p/w500${homePageModel.profilePath}',
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error))),
           ),
           footer: Container(
             width: double.infinity,
@@ -62,10 +55,10 @@ class SearchWidget extends StatelessWidget {
             color: Colors.black54,
             alignment: Alignment.bottomCenter,
             child: Text(
-              home_page_model.name == null
-                  ? 'We Dont Have a titles Yet'
-                  : home_page_model.name!,
-              style: TextStyle(
+              homePageModel.name == null
+                  ? 'We Dont Have a Name Yet'
+                  : homePageModel.name!,
+              style: const TextStyle(
                   height: 1.3,
                   fontSize: 16,
                   fontWeight: FontWeight.bold,

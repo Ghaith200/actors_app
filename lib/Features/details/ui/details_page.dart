@@ -4,15 +4,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gallery_app/Constants/my_colors.dart';
+import 'package:gallery_app/Core/helpers/my_colors.dart';
 import 'package:gallery_app/data/Services/api_services.dart';
 import 'package:gallery_app/data/models/actor_info_model.dart';
 import 'package:gallery_app/data/models/home_page_model.dart';
 import 'package:gallery_app/data/models/images_model.dart';
 import 'package:gallery_app/data/repository/actor_info_repo.dart';
 import 'package:gallery_app/data/repository/images_repo.dart';
-import 'package:gallery_app/presentation_layer/widgets/my_progress_indecator.dart';
-import 'package:gallery_app/presentation_layer/widgets/my_sperater.dart';
+import 'package:gallery_app/Core/widgets/my_progress_indecator.dart';
+import 'package:gallery_app/Core/widgets/my_sperater.dart';
 
 class DetailsPage extends StatefulWidget {
   DetailsPage({

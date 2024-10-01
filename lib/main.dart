@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gallery_app/app_route.dart';
 import 'package:gallery_app/data/Services/api_services.dart';
-import 'package:gallery_app/presentation_layer/themes/theme_provider.dart';
+import 'package:gallery_app/Core/theming/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() {

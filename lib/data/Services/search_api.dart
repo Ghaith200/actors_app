@@ -1,8 +1,8 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:gallery_app/Constants/api.dart';
-import 'package:gallery_app/Constants/api_key.dart';
+import 'package:gallery_app/Core/helpers/api.dart';
+import 'package:gallery_app/Core/helpers/api_key.dart';
 
 class SearchApi {
   late Dio dio;
